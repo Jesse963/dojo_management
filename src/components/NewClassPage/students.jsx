@@ -1,0 +1,124 @@
+import React, { Component } from "react";
+import Student from "./student.jsx";
+
+class Students extends Component {
+  state = {
+    currentAttendance: [],
+    students: [
+      { name: "Jesse Jenkins", grade: "2 Dan", id: 1 },
+      { name: "Michael Thomakos", grade: "3 Dan", id: 2 },
+      { name: "Stefan Roubas", grade: "8 Dan", id: 3 },
+      { name: "Jayson Cook", grade: "6 Dan", id: 4 },
+      { name: "Jason Spata", grade: "1 Kyu", id: 5 },
+      { name: "Seyon Umapathy", grade: "4 Kyu", id: 6 },
+      { name: "Jesse Jenkins", grade: "2 Dan", id: 1 },
+      { name: "Michael Thomakos", grade: "3 Dan", id: 2 },
+      { name: "Stefan Roubas", grade: "8 Dan", id: 3 },
+      { name: "Jayson Cook", grade: "6 Dan", id: 4 },
+      { name: "Jason Spata", grade: "1 Kyu", id: 5 },
+      { name: "Seyon Umapathy", grade: "4 Kyu", id: 6 },
+      { name: "Jesse Jenkins", grade: "2 Dan", id: 1 },
+      { name: "Michael Thomakos", grade: "3 Dan", id: 2 },
+      { name: "Stefan Roubas", grade: "8 Dan", id: 3 },
+      { name: "Jayson Cook", grade: "6 Dan", id: 4 },
+      { name: "Jason Spata", grade: "1 Kyu", id: 5 },
+      { name: "Seyon Umapathy", grade: "4 Kyu", id: 6 },
+    ],
+  };
+
+  // add student to attending students array
+  addStudentToAttending = (student, selected) => {
+    let currentlyAttending = this.state.currentAttendance;
+    if (currentlyAttending.includes(student)) {
+      currentlyAttending.splice(currentlyAttending.indexOf(student), 1);
+    } else {
+      currentlyAttending.push(student);
+    }
+    this.setState({ currentAttendance: currentlyAttending });
+    // const test = selected ? "is not selected" : "is selected";
+    // console.log(`${student} ${test} ${selected}`);
+  };
+
+  submitAttendance = () => {
+    console.log(this.state.currentAttendance);
+  };
+
+  render() {
+    return (
+      <div
+        className="attendance selection panel"
+        style={{
+          marginTop: "15%",
+          padding: "15px",
+          border: "2px solid black",
+          height: "100%",
+          textAlign: "center",
+        }}
+        className="shadow-lg p-3 mb-5 bg-white rounded"
+      >
+        <h1 className="m-3">Select Attending Students</h1>
+        <div style={{ display: "flex", flexDirection: "row" }}>
+          <div
+            className="left panel"
+            style={{
+              width: "66%",
+              textAlign: "start",
+              marginBottom: "5%",
+              marginLeft: "5%",
+            }}
+          >
+            <div className="filter selections">
+              Select Filters
+              <input
+                type="text"
+                name="studentSearch"
+                id="studentSearch"
+                className="m-3"
+              />
+            </div>
+            <div
+              className="mapped students"
+              style={{
+                // webkitscr
+                maxHeight: "40vh",
+                overflow: "auto",
+              }}
+            >
+              {this.state.students.map((student) => (
+                <Student
+                  key={student.name}
+                  name={student.name}
+                  grade={student.grade}
+                  addStudentToAttending={this.addStudentToAttending}
+                />
+              ))}
+            </div>
+          </div>
+          <div
+            className="right panel"
+            style={{
+              border: "2px solid black",
+              textAlign: "center",
+              marginBottom: "5%",
+              marginRight: "5%",
+            }}
+          >
+            <div className="controls">
+              <button
+                onClick={this.submitAttendance}
+                className="btn btn-primary btn-lg m-3"
+              >
+                Submit with Today's Date
+              </button>
+              <button className="btn btn-primary btn-lg m-3">
+                Submit for Another Date
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+export default Students;
