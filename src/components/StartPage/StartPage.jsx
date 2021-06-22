@@ -40,7 +40,7 @@ class StartPage extends Component {
         className="shadow-lg p-3 mb-5 bg-white rounded"
       >
         <h1 className="m-3" style={{ textAlign: "center" }}>
-          Welcome to Mushin, what would you like to do?
+          Welcome to [School], what would you like to do?
         </h1>
         <button
           className="btn btn-primary btn-lg m-3"
