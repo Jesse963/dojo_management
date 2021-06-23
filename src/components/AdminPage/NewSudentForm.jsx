@@ -5,33 +5,41 @@ class NewStudentForm extends Component {
   render() {
     return (
       <form
-        style={{
-          marginTop: "5%",
-          border: "2px solid black",
-          padding: "5%",
-          marginBottom: "5%",
-          textAlign: "center",
-        }}
         action="/new student success"
-        className="shadow-lg p-3 mb-5 bg-white rounded"
+        className="shadow-lg p-3 mb-5 bg-white rounded page container"
       >
-        <h1>Enter New Student Details</h1>
-        <p>First Name:</p>
-        <input type="text" />
-        <p>Last Name:</p>
-        <input type="text" />
-        <p>Phone Number:</p>
-        <input type="text" />
-        <p>Address:</p>
-        <input type="text" />
-        <p>Email:</p>
-        <input type="text" />
-        <p>Credit Card:</p>
-        <input type="text" />
-        <p></p>
-        <button type="submit" className="btn btn-primary btn-lg">
-          Submit
-        </button>
+        <div style={{ paddingLeft: "5%", paddingRight: "5%" }}>
+          <h1 style={{ textAlign: "center" }}>Enter New Student Details</h1>
+          <p>First Name:</p>
+          <input type="text" style={{ width: "100%" }} />
+          <p>Last Name:</p>
+          <input type="text" style={{ width: "100%" }} />
+          <p>Phone Number:</p>
+          <input type="text" style={{ width: "100%" }} />
+          <p>Address:</p>
+          <input type="text" style={{ width: "100%" }} />
+          <p>Email:</p>
+          <input type="text" style={{ width: "100%" }} />
+          <p>Credit Card:</p>
+          <input type="text" style={{ width: "100%" }} />
+          <p></p>
+        </div>
+        <div style={{ textAlign: "center" }}>
+          <button
+            type="submit"
+            className="btn btn-primary btn-lg m-2"
+            style={{ width: "20%" }}
+          >
+            Submit
+          </button>
+          <button
+            type="cancel"
+            className="btn btn-danger btn-lg m-2"
+            style={{ width: "20%" }}
+          >
+            Cancel
+          </button>
+        </div>
       </form>
     );
   }

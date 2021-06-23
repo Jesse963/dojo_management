@@ -11,18 +11,6 @@ class Students extends Component {
       { name: "Jayson Cook", grade: "6 Dan", id: 4 },
       { name: "Jason Spata", grade: "1 Kyu", id: 5 },
       { name: "Seyon Umapathy", grade: "4 Kyu", id: 6 },
-      { name: "Jesse Jenkins", grade: "2 Dan", id: 1 },
-      { name: "Michael Thomakos", grade: "3 Dan", id: 2 },
-      { name: "Stefan Roubas", grade: "8 Dan", id: 3 },
-      { name: "Jayson Cook", grade: "6 Dan", id: 4 },
-      { name: "Jason Spata", grade: "1 Kyu", id: 5 },
-      { name: "Seyon Umapathy", grade: "4 Kyu", id: 6 },
-      { name: "Jesse Jenkins", grade: "2 Dan", id: 1 },
-      { name: "Michael Thomakos", grade: "3 Dan", id: 2 },
-      { name: "Stefan Roubas", grade: "8 Dan", id: 3 },
-      { name: "Jayson Cook", grade: "6 Dan", id: 4 },
-      { name: "Jason Spata", grade: "1 Kyu", id: 5 },
-      { name: "Seyon Umapathy", grade: "4 Kyu", id: 6 },
     ],
   };
 
@@ -35,6 +23,7 @@ class Students extends Component {
       currentlyAttending.push(student);
     }
     this.setState({ currentAttendance: currentlyAttending });
+    console.log(this.state.currentAttendance.length);
     // const test = selected ? "is not selected" : "is selected";
     // console.log(`${student} ${test} ${selected}`);
   };
@@ -104,6 +93,9 @@ class Students extends Component {
             }}
           >
             <div className="controls">
+              <h2 className="m-3">
+                {this.state.currentAttendance.length} students selected
+              </h2>
               <button
                 onClick={this.submitAttendance}
                 className="btn btn-primary btn-lg m-3"

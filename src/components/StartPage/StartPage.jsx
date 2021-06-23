@@ -4,6 +4,7 @@ import Students from "../NewClassPage/students";
 import StudentDetails from "../studentPage/StudentDetails";
 import AdminPage from "../AdminPage/AdminPage";
 import TrendsPage from "../TrendsPage/TrendsPage";
+import "../core.css";
 
 class StartPage extends Component {
   state = {
@@ -26,19 +27,7 @@ class StartPage extends Component {
 
   render() {
     return (
-      <div
-        className="startPageContainer"
-        style={{
-          marginTop: "15%",
-          padding: "15px",
-          border: "2px solid black",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          height: "100%",
-        }}
-        className="shadow-lg p-3 mb-5 bg-white rounded"
-      >
+      <div className="start page container shadow-lg p-3 mb-5 bg-white rounded">
         <h1 className="m-3" style={{ textAlign: "center" }}>
           Welcome to [School], what would you like to do?
         </h1>

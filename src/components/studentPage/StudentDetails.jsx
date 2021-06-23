@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import StudentInfo from "./StudentInfo";
 
 class StudentDetails extends Component {
   state = {
@@ -22,12 +23,12 @@ class StudentDetails extends Component {
   };
   render() {
     return (
-      <ul className="mt-5">
-        <li>{this.state.details.name}</li>
-        <li>{this.state.details.dob}</li>
-        <li>{this.state.details.contact.phone}</li>
-        <li>{this.state.details.grade}</li>
-      </ul>
+      <div
+        className="page container shadow-lg p-3 mb-5 bg-white rounded"
+        style={{ display: "flex", flexDirection: "row" }}
+      >
+        <StudentInfo details={this.state.details} />
+      </div>
     );
   }
 }
