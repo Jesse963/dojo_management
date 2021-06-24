@@ -1,9 +1,15 @@
 .page.container {
-  margin-top: 15%;
+  margin-top: 5%;
   padding: 15px;
   border: 2px solid black;
   display: flex;
   flex-direction: column;
   justify-content: center;
   height: 100%;
+}
+
+#root {
+  background: url("backgroundImage.jpg");
+
+  height: 100vh;
 }

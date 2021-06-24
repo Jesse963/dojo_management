@@ -13,12 +13,18 @@ class StartPage extends Component {
 
   navigateToNewClass = () => {
     console.log("Navigated to New Class");
-    ReactDOM.render(<Students />, document.querySelector(".container"));
+    ReactDOM.render(
+      <Students students={this.props.school.students} />,
+      document.querySelector(".container")
+    );
   };
 
   navigateToTrends = () => {
     console.log("Navigated to Trends");
-    ReactDOM.render(<TrendsPage />, document.querySelector(".container"));
+    ReactDOM.render(
+      <TrendsPage students={this.props.school.students} />,
+      document.querySelector(".container")
+    );
   };
   navigateToAdmin = () => {
     console.log("Navigated to Admin");
@@ -27,9 +33,12 @@ class StartPage extends Component {
 
   render() {
     return (
-      <div className="start page container shadow-lg p-3 mb-5 bg-white rounded">
+      <div
+        className="start page container shadow-lg p-3 mb-5 bg-white rounded"
+        style={{ marginTop: "15%" }}
+      >
         <h1 className="m-3" style={{ textAlign: "center" }}>
-          Welcome to [School], what would you like to do?
+          Welcome to {this.props.school.name}, what would you like to do?
         </h1>
         <button
           className="btn btn-primary btn-lg m-3"

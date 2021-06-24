@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import StudentInfo from "./StudentInfo";
+import StudentPerformance from "./StudentPerformance";
 
 class StudentDetails extends Component {
   state = {
@@ -28,6 +29,7 @@ class StudentDetails extends Component {
         style={{ display: "flex", flexDirection: "row" }}
       >
         <StudentInfo details={this.state.details} />
+        <StudentPerformance details={this.state.details} />
       </div>
     );
   }

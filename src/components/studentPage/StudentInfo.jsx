@@ -7,19 +7,30 @@ class StudentInfo extends Component {
       <div
         className="left panel"
         style={{
-          maxWidth: "25%",
-          overflowX: "scroll",
+          minWidth: "15vw",
+          maxHeight: "80%",
         }}
       >
+        <h1
+          style={{
+            textAlign: "center",
+            overflowX: "auto",
+            overflowY: "hidden",
+          }}
+        >
+          {this.props.details.name}
+        </h1>
         <div
           className="profile image"
           style={{
-            width: "250px",
-            height: "250px",
+            minWidth: "15vw",
+            minHeight: "15vw",
             border: "2px dashed red",
           }}
-        ></div>
-        <h2 style={{ textAlign: "center" }}>{this.props.details.name}</h2>
+        >
+          student profile image
+        </div>
+
         <ul
           className=""
           style={{
@@ -27,6 +38,7 @@ class StudentInfo extends Component {
             listStyle: "none",
             margin: "0",
             padding: "0",
+            height: "30vh",
           }}
         >
           <li>{this.props.details.name}</li>
@@ -34,6 +46,14 @@ class StudentInfo extends Component {
           <li>{this.props.details.contact.phone}</li>
           <li>{this.props.details.grade}</li>
         </ul>
+        <div
+          className="control panel"
+          style={{ width: "100%", textAlign: "center" }}
+        >
+          <button className="btn btn-primary btn-lg m-2">Edit</button>
+          <button className="btn btn-primary btn-lg m-2">Home</button>
+          <button className="btn btn-primary btn-lg m-2">Back</button>
+        </div>
       </div>
     );
   }

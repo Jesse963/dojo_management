@@ -4,14 +4,6 @@ import Student from "./student.jsx";
 class Students extends Component {
   state = {
     currentAttendance: [],
-    students: [
-      { name: "Jesse Jenkins", grade: "2 Dan", id: 1 },
-      { name: "Michael Thomakos", grade: "3 Dan", id: 2 },
-      { name: "Stefan Roubas", grade: "8 Dan", id: 3 },
-      { name: "Jayson Cook", grade: "6 Dan", id: 4 },
-      { name: "Jason Spata", grade: "1 Kyu", id: 5 },
-      { name: "Seyon Umapathy", grade: "4 Kyu", id: 6 },
-    ],
   };
 
   // add student to attending students array
@@ -73,7 +65,7 @@ class Students extends Component {
                 overflow: "auto",
               }}
             >
-              {this.state.students.map((student) => (
+              {this.props.students.map((student) => (
                 <Student
                   key={student.name}
                   name={student.name}
