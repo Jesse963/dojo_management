@@ -1,11 +1,13 @@
 const mongoose = require("mongoose");
-const { array } = require("yargs");
-const Schema = mongoose.schema
 
-let StudentSchema = new Schema({
+let StudentSchema = mongoose.Schema({
     name:{
         type: String,
         required: true,
+    },
+    school:{
+        type:String,
+        required:true
     },
     dob:{
         type: String,

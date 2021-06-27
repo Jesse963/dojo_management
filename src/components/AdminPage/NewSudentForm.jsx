@@ -6,23 +6,24 @@ class NewStudentForm extends Component {
     return (
       <form
         method="POST"
-        action="../../controllers/api.js"
+        action="http://localhost:8080/api/submit_student"
         className="shadow-lg p-3 mb-5 bg-white rounded page container"
+        id="newStudnetForm"
       >
         <div style={{ paddingLeft: "5%", paddingRight: "5%" }}>
           <h1 style={{ textAlign: "center" }}>Enter New Student Details</h1>
           <p>First Name:</p>
-          <input type="text" style={{ width: "100%" }} />
+          <input name="first_name" type="text" style={{ width: "100%" }} />
           <p>Last Name:</p>
-          <input type="text" style={{ width: "100%" }} />
+          <input name="last_name" type="text" style={{ width: "100%" }} />
           <p>Date of Birth:</p>
-          <input type="text" style={{ width: "100%" }} />
+          <input name="dob" type="text" style={{ width: "100%" }} />
           <p>Phone Number:</p>
-          <input type="text" style={{ width: "100%" }} />
+          <input name="phone" type="text" style={{ width: "100%" }} />
           <p>Address:</p>
-          <input type="text" style={{ width: "100%" }} />
+          <input name="address" type="text" style={{ width: "100%" }} />
           <p>Email:</p>
-          <input type="text" style={{ width: "100%" }} />
+          <input name="email" type="text" style={{ width: "100%" }} />
           <p></p>
         </div>
         <div style={{ textAlign: "center" }}>
