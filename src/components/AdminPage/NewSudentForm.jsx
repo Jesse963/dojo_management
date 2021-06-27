@@ -5,7 +5,8 @@ class NewStudentForm extends Component {
   render() {
     return (
       <form
-        action="/new student success"
+        method="POST"
+        action="../../controllers/api.js"
         className="shadow-lg p-3 mb-5 bg-white rounded page container"
       >
         <div style={{ paddingLeft: "5%", paddingRight: "5%" }}>
@@ -14,13 +15,13 @@ class NewStudentForm extends Component {
           <input type="text" style={{ width: "100%" }} />
           <p>Last Name:</p>
           <input type="text" style={{ width: "100%" }} />
+          <p>Date of Birth:</p>
+          <input type="text" style={{ width: "100%" }} />
           <p>Phone Number:</p>
           <input type="text" style={{ width: "100%" }} />
           <p>Address:</p>
           <input type="text" style={{ width: "100%" }} />
           <p>Email:</p>
-          <input type="text" style={{ width: "100%" }} />
-          <p>Credit Card:</p>
           <input type="text" style={{ width: "100%" }} />
           <p></p>
         </div>
