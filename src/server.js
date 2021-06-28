@@ -27,15 +27,13 @@ mongoose.connect(process.env.MONGO_URI, {
 });
 const db = mongoose.connection;
 db.on("error", (err) => console.error(err));
-db.once("open", (MONGO_URI) => console.log("Connected to DB"));
+db.once("open", (MONGO_URI) => {
+  console.log("Connected to DB");
 
+  app.use(express.json({ limit: "50mb" }));
+  app.use(express.urlencoded({ extended: true }));
+  app.use("/api", routes)
 
-
-app.use(express.json({ limit: "50mb" }));
-app.use(express.urlencoded({ extended: true }));
-
-app.use("/api", routes)
-
-
-const port = 8080
-app.listen(port, () => console.log(`App running on port ${port}`)); 
+  const port = 8080
+  app.listen(port, () => console.log(`App running on port ${port}`)); 
+})

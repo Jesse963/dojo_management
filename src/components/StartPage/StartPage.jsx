@@ -14,7 +14,7 @@ class StartPage extends Component {
   navigateToNewClass = () => {
     console.log("Navigated to New Class");
     ReactDOM.render(
-      <Students students={this.props.school.students} />,
+      <Students students={this.props.students} />,
       document.querySelector(".container")
     );
   };
@@ -22,7 +22,7 @@ class StartPage extends Component {
   navigateToTrends = () => {
     console.log("Navigated to Trends");
     ReactDOM.render(
-      <TrendsPage students={this.props.school.students} />,
+      <TrendsPage students={this.props.students} />,
       document.querySelector(".container")
     );
   };
