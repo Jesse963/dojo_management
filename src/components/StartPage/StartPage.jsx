@@ -28,7 +28,10 @@ class StartPage extends Component {
   };
   navigateToAdmin = () => {
     console.log("Navigated to Admin");
-    ReactDOM.render(<AdminPage />, document.querySelector(".container"));
+    ReactDOM.render(
+      <AdminPage students={this.props.students} />,
+      document.querySelector(".container")
+    );
   };
 
   render() {

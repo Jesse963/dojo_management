@@ -17,6 +17,7 @@ class Student extends Component {
   };
 
   render() {
+    console.log(this.props);
     return (
       <li>
         <button onClick={this.handleClick} className={this.checkStyle()}>

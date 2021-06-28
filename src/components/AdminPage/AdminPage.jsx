@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import NewStudentForm from "./NewSudentForm";
 import ReactDOM from "react-dom";
 import StudentDetails from "../studentPage/StudentDetails";
+import StudentSelection from "../studentPage/StudentSelection";
 
 class AdminPage extends Component {
   state = {};
@@ -38,7 +39,7 @@ class AdminPage extends Component {
           className="btn btn-primary btn-lg m-2"
           onClick={() =>
             ReactDOM.render(
-              <StudentDetails />,
+              <StudentSelection students={this.props.students} />,
               document.querySelector(".container")
             )
           }

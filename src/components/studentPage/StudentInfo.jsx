@@ -3,6 +3,7 @@ import React, { Component } from "react";
 class StudentInfo extends Component {
   state = {};
   render() {
+    console.log("Student Info props: ", this.props);
     return (
       <div
         className="left panel"
@@ -18,7 +19,7 @@ class StudentInfo extends Component {
             overflowY: "hidden",
           }}
         >
-          {this.props.details.name}
+          {this.props.student.name}
         </h1>
         <div
           className="profile image"
@@ -41,10 +42,10 @@ class StudentInfo extends Component {
             height: "30vh",
           }}
         >
-          <li>{this.props.details.name}</li>
-          <li>{this.props.details.dob}</li>
-          <li>{this.props.details.contact.phone}</li>
-          <li>{this.props.details.grade}</li>
+          <li>{this.props.student.name}</li>
+          <li>{this.props.student.dob}</li>
+          <li>{this.props.student.phone}</li>
+          <li>{this.props.student.grade}</li>
         </ul>
         <div
           className="control panel"
