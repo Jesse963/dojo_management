@@ -20,8 +20,16 @@ class Students extends Component {
     // console.log(`${student} ${test} ${selected}`);
   };
 
-  submitAttendance = () => {
+  submitAttendance = async () => {
     console.log(this.state.currentAttendance);
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(this.state.currentAttendance),
+    };
+    await fetch("/api/uploadAttendance", options);
   };
 
   render() {
@@ -65,14 +73,22 @@ class Students extends Component {
                 overflow: "auto",
               }}
             >
-              {this.props.students.map((student) => (
-                <Student
-                  key={student.name}
-                  name={student.name}
-                  grade={student.grade}
-                  addStudentToAttending={this.addStudentToAttending}
-                />
-              ))}
+              <ul
+                style={{
+                  listStyleType: "none",
+                  paddingLeft: "0px",
+                  textAlign: "center",
+                }}
+              >
+                {this.props.students.map((student) => (
+                  <Student
+                    key={student.name}
+                    name={student.name}
+                    grade={student.grade}
+                    addStudentToAttending={this.addStudentToAttending}
+                  />
+                ))}
+              </ul>
             </div>
           </div>
           <div

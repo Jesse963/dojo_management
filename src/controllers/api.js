@@ -1,9 +1,19 @@
 const express = require("express");
 const router = express.Router();
-const {submitStudent, testing, getStudents} = require("./databaseUploads")
+const {
+  getSchool,
+  submitStudent,
+  uploadAttendance,
+  getStudents,
+  addNewSchool,
+  login,
+} = require("./databaseUploads");
 
-router.post("/submit_student", submitStudent)
-router.post("/test", testing)
-router.get("/getStudents", getStudents)
+router.get("/getStudents", getStudents);
+router.post("/getSchool", getSchool);
+router.post("/login", login);
+router.post("/submit_student", submitStudent);
+router.post("/uploadAttendance", uploadAttendance);
+router.post("/addNewSchool", addNewSchool);
 
 module.exports = router;

@@ -6,7 +6,7 @@ class NewStudentForm extends Component {
     return (
       <form
         method="POST"
-        action="http://localhost:8080/api/submit_student"
+        action="/api/submit_student"
         className="shadow-lg p-3 mb-5 bg-white rounded page container"
         id="newStudnetForm"
       >

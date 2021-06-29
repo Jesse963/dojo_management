@@ -29,7 +29,14 @@ let StudentSchema = mongoose.Schema({
         type: String,
         required: true,
     }
-})
+},
+{
+    timestamps: {
+      createdAt: "createdAt",
+      updatedAt: "updatedAt",
+    },
+  }
+)
 
 const Student = mongoose.model("students", StudentSchema)
 module.exports = Student

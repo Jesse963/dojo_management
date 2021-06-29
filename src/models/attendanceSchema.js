@@ -6,7 +6,7 @@ let AttendanceSchema = mongoose.Schema({
         required:true
     },
     date:{
-        type: String,
+        type: Date,
         required: true,
     },
     classType:{
@@ -17,7 +17,14 @@ let AttendanceSchema = mongoose.Schema({
         type: Array,
         required: true,
     },
-})
+},
+{
+    timestamps: {
+      createdAt: "createdAt",
+      updatedAt: "updatedAt",
+    },
+  }
+)
 
 const Attendance = mongoose.model("attendances", AttendanceSchema)
 module.exports = Attendance

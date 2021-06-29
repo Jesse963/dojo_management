@@ -46,18 +46,21 @@ class StartPage extends Component {
         <button
           className="btn btn-primary btn-lg m-3"
           onClick={this.navigateToNewClass}
+          style={{ width: "50%", alignSelf: "center" }}
         >
           Start Class
         </button>
         <button
           className="btn btn-primary btn-lg m-3"
           onClick={this.navigateToTrends}
+          style={{ width: "50%", alignSelf: "center" }}
         >
           Trends
         </button>
         <button
           className="btn btn-primary btn-lg m-3"
           onClick={this.navigateToAdmin}
+          style={{ width: "50%", alignSelf: "center" }}
         >
           Admin
         </button>

@@ -1,60 +1,82 @@
-import React, { Component } from 'react';
-import NavBar from './components/navbar';
-import StartPage from './components/StartPage/StartPage';
-
-const testSchool = {
-    name:"Mushin Goju Ryu Karate Academy",
-    id: "0",
-    grades:{
-        system:["Dan", "Kyu"],
-        rank:[1,2,3,4,5,6,7,8,9,10]
-    },
-    classTypes:["Beginner", "Intermediate", "Advanced"],
-    // students:[
-    //     {name: "Jesse Jenkins",grade: "2 Dan", id: 1},
-    //     {name: "Michael Thomakos",grade: "3 Dan", id: 2},
-    //     {name: "Stefan Roubas",grade: "8 Dan", id: 3},
-    //     {name: "Jayson Cook",grade: "6 Dan", id: 4},
-    //     {name: "Jason Spata",grade: "1 Kyu", id: 5},
-    //     {name: "Seyon Umapathy",grade: "4 Kyu", id: 6},
-    // ]
-}
-
-// async function fetchStudents(){
-//     let test;    
-//     let res = await fetch("/api/getStudents")
-//     let response = await res.json()
-//     console.log(response)
-//     return response.result
-// }
+import React, { Component } from "react";
+import NavBar from "./components/navbar";
+import StartPage from "./components/StartPage/StartPage";
+import LoginPanel from "./components/loginPanel/loginPanel";
 
 class App extends Component {
-    state = {
-        school:testSchool,
-        students: []
-    };
-    componentDidMount(){
-        this.fetchStudents()
-    }
-    fetchStudents(){
-        fetch("/api/getStudents").then(async res => {
-            const response = await res.json()
-            return this.setState({students:response.result})
-        }).catch(err => console.log(err))
-    }
+  state = {
+    school: {},
+    students: [],
+  };
 
-    render() { 
-        console.log(this.state.students)
-        return ( 
-            <React.Fragment>
-                <NavBar/>
-                <main className ="container">
-                    <StartPage school = {this.state.school}
-                    students = {this.state.students}/>
-                </main>
-            </React.Fragment >
-         );
+  componentDidMount() {
+    this.getSchool();
+    this.fetchStudents();
+  }
+
+  fetchStudents() {
+    fetch("/api/getStudents")
+      .then(async (res) => {
+        const response = await res.json();
+        return this.setState({ students: response.result });
+      })
+      .catch((err) => console.log(err));
+  }
+
+  getSchool = async () => {
+    console.log("getting school");
+    let school_id;
+    if (document.cookie.length === 0) {
+      console.log("cookie length = 0");
+      return;
+    } else {
+      school_id = document.cookie.split(";")[0].split("=")[1];
+
+      console.log(school_id);
+
+      const options = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ school_id: school_id }),
+      };
+
+      const school = await fetch("/api/getSchool", options);
+      console.log("heres a fuckign log", school);
+
+      const finalSchool = await school.json();
+      console.log("another dfucking log", finalSchool);
+
+      return this.setState({ school: finalSchool });
     }
+  };
+
+  render() {
+    if (document.cookie.length === 0) {
+      console.log("no cookie exists");
+      return (
+        <React.Fragment>
+          <NavBar />
+          <main className="container">
+            <LoginPanel />
+          </main>
+        </React.Fragment>
+      );
+    } else {
+      return (
+        <React.Fragment>
+          <NavBar />
+          <main className="container">
+            {
+              <StartPage
+                school={this.state.school}
+                students={this.state.students}
+              />
+            }
+          </main>
+        </React.Fragment>
+      );
+    }
+  }
 }
- 
+
 export default App;

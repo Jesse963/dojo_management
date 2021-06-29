@@ -17,10 +17,13 @@ class Student extends Component {
   };
 
   render() {
-    console.log(this.props);
     return (
       <li>
-        <button onClick={this.handleClick} className={this.checkStyle()}>
+        <button
+          onClick={this.handleClick}
+          className={this.checkStyle()}
+          style={{ minWidth: "50%" }}
+        >
           {this.props.name}
         </button>
       </li>
