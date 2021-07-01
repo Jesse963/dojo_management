@@ -29,9 +29,13 @@ class StartPage extends Component {
   navigateToAdmin = () => {
     console.log("Navigated to Admin");
     ReactDOM.render(
-      <AdminPage students={this.props.students} />,
+      <AdminPage students={this.props.students} school={this.props.school} />,
       document.querySelector(".container")
     );
+  };
+  logOut = () => {
+    document.cookie = "school_id=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    window.location.href = "/";
   };
 
   render() {
@@ -63,6 +67,13 @@ class StartPage extends Component {
           style={{ width: "50%", alignSelf: "center" }}
         >
           Admin
+        </button>
+        <button
+          className="btn btn-danger btn-lg m-3"
+          onClick={this.logOut}
+          style={{ width: "25%", alignSelf: "center" }}
+        >
+          Log Out
         </button>
       </div>
     );

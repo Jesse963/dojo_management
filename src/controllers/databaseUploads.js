@@ -2,17 +2,20 @@ const { v4: uuidv4 } = require("uuid");
 const Attendance = require("../models/attendanceSchema");
 const School = require("../models/schoolSchema");
 const Student = require("../models/studentSchema");
+const querystring = require("querystring");
 const router = require("./api");
 
 exports.submitStudent = async (req, res) => {
   console.log("entered submit student");
+
+  console.log(req.query);
+
   try {
     const newStudent = req.body;
-    console.log(`New Student: ${newStudent}`);
     const studentEntry = new Student({
       name: newStudent.first_name + " " + newStudent.last_name,
-      school: "Mushin Goju Ryu Karate Academy",
-      dob: "27/01/1996",
+      school: req.query.school_id,
+      dob: newStudent.dob,
       grade: "White Belt",
       phone: newStudent.phone,
       email: newStudent.email,
@@ -29,18 +32,18 @@ exports.submitStudent = async (req, res) => {
 };
 
 exports.getStudents = async (req, res) => {
-  const schoolName = "Mushin Goju Ryu Karate Academy";
-  console.log("Attempting to get students from: " + schoolName);
+  const school_id = req.headers.cookie.split("=")[1];
+  console.log(school_id);
   let students;
   try {
-    students = await Student.find({ school: schoolName });
-    console.log(students);
+    students = await Student.find({ school: school_id });
   } catch (error) {
     return res.status(400).json({
       error: true,
       message: `Error getting students from database: ${error}`,
     });
   }
+  console.log("found students, returning");
   res.status(200).json({
     result: students,
     message: "Students found",
@@ -72,13 +75,17 @@ exports.uploadAttendance = async (req, res) => {
 };
 
 exports.addNewSchool = async (req, res) => {
-  console.log("entered new school");
+  const school_id = uuidv4();
   try {
     school = new School({
-      name: req.body.name,
+      name: req.body.school_name,
       password: req.body.password,
       email: req.body.email,
-      schoolID: uuidv4(),
+      first_name: req.body.first_name,
+      last_name: req.body.last_name,
+      phone: req.body.phone,
+      postcode: req.body.postcode,
+      schoolID: school_id,
       //need to add grades/classtypes eventually
     });
     await school.save();
@@ -90,10 +97,9 @@ exports.addNewSchool = async (req, res) => {
     });
   } //finally
   console.log("Successful Upload");
-  return res.status(200).json({
-    message: "New School Uploaded successfully",
-    success: true,
-  });
+  res.cookie(`school_id=${school_id}`);
+  res.location("/");
+  res.send(302);
 };
 
 exports.login = async (req, res) => {
@@ -115,6 +121,7 @@ exports.login = async (req, res) => {
       message: `Error getting students from database: ${error}`,
     });
   }
+  console.log("HERE IS YOUR SCHOOL ID:" + school.schoolID);
   res.cookie(`school_id=${school.schoolID}`);
   res.location("/");
   res.send(302);
@@ -128,15 +135,14 @@ exports.getSchool = async (req, res) => {
   console.log("entered get school");
   let school;
   try {
-    school = School.findOne({ schoolID: req.school_id });
-    console.log("here is your fucking school", school);
+    school = await School.find({ schoolID: req.body.school_id });
   } catch (error) {
     return res.status(400).json({
       error: true,
       message: "Error getting school from database - " + error,
     });
   } //finally
-  console.log("Successful Upload");
+  console.log("School found, ", school);
   return res.status(200).json({
     result: school,
     message: "Retrieved school successfully",

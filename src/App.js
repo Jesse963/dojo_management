@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import NavBar from "./components/navbar";
 import StartPage from "./components/StartPage/StartPage";
 import LoginPanel from "./components/loginPanel/loginPanel";
+import NewSchoolForm from "./components/newSchoolPage/newSchoolForm";
 
 class App extends Component {
   state = {
@@ -43,7 +44,8 @@ class App extends Component {
       const school = await fetch("/api/getSchool", options);
       console.log("heres a fuckign log", school);
 
-      const finalSchool = await school.json();
+      let finalSchool = await school.json();
+      finalSchool = finalSchool.result[0];
       console.log("another dfucking log", finalSchool);
 
       return this.setState({ school: finalSchool });
@@ -58,6 +60,7 @@ class App extends Component {
           <NavBar />
           <main className="container">
             <LoginPanel />
+            <NewSchoolForm />
           </main>
         </React.Fragment>
       );

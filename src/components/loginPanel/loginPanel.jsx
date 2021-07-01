@@ -3,9 +3,10 @@ import "../core.css";
 
 class LoginPanel extends Component {
   state = {};
-  login() {
-    // document.cookie = `school_id=${school.schoolID}`;
+  createAccount(e) {
+    e.preventDefault();
   }
+
   render() {
     return (
       <form
@@ -42,7 +43,13 @@ class LoginPanel extends Component {
           >
             Submit
           </button>
-          <button className="btn btn-secondary mt-3">Create Account</button>
+          <button
+            type="cancel"
+            className="btn btn-secondary mt-3"
+            onClick={this.createAccount}
+          >
+            Create Account
+          </button>
         </div>
       </form>
     );

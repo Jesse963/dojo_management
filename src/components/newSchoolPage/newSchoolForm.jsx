@@ -1,29 +1,31 @@
 import React, { Component } from "react";
 
-class NewStudentForm extends Component {
+class NewSchoolForm extends Component {
   state = {};
   render() {
     return (
       <form
         method="POST"
-        action={"/api/submit_student?school_id=" + this.props.school_id}
+        action="/api/addNewSchool"
         className="shadow-lg p-3 mb-5 bg-white rounded page container"
-        id="newStudnetForm"
+        id="newSchoolForm"
       >
         <div style={{ paddingLeft: "5%", paddingRight: "5%" }}>
-          <h1 style={{ textAlign: "center" }}>Enter New Student Details</h1>
+          <h1 style={{ textAlign: "center" }}>Welcome</h1>
+          <p>Name of School:</p>
+          <input name="school_name" type="text" style={{ width: "100%" }} />
+          <p>Email:</p>
+          <input name="email" type="text" style={{ width: "100%" }} />
           <p>First Name:</p>
           <input name="first_name" type="text" style={{ width: "100%" }} />
           <p>Last Name:</p>
           <input name="last_name" type="text" style={{ width: "100%" }} />
-          <p>Date of Birth:</p>
-          <input name="dob" type="text" style={{ width: "100%" }} />
-          <p>Phone Number:</p>
+          <p>Phone:</p>
           <input name="phone" type="text" style={{ width: "100%" }} />
-          <p>Address:</p>
-          <input name="address" type="text" style={{ width: "100%" }} />
-          <p>Email:</p>
-          <input name="email" type="text" style={{ width: "100%" }} />
+          <p>Postcode:</p>
+          <input name="postcode" type="number" style={{ width: "100%" }} />
+          <p>Password:</p>
+          <input name="password" type="password" style={{ width: "100%" }} />
           <p></p>
         </div>
         <div style={{ textAlign: "center" }}>
@@ -47,4 +49,4 @@ class NewStudentForm extends Component {
   }
 }
 
-export default NewStudentForm;
+export default NewSchoolForm;

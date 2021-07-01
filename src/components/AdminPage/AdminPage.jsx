@@ -28,7 +28,7 @@ class AdminPage extends Component {
           className="btn btn-primary btn-lg m-2"
           onClick={() =>
             ReactDOM.render(
-              <NewStudentForm />,
+              <NewStudentForm school_id={this.props.school.schoolID} />,
               document.querySelector(".container")
             )
           }
