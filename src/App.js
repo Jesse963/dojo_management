@@ -17,10 +17,8 @@ class App extends Component {
 
   fetchStudents() {
     fetch("/api/getStudents")
-      .then(async (res) => {
-        const response = await res.json();
-        return this.setState({ students: response.result });
-      })
+      .then((res) => res.json())
+      .then((res) => this.setState({ students: res.result }))
       .catch((err) => console.log(err));
   }
 
