@@ -35,7 +35,9 @@ class StartPage extends Component {
   };
   logOut = () => {
     document.cookie = "school_id=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
-    window.location.href = "/";
+    setTimeout(() => {
+      window.location.href = "/";
+    }, 1000);
   };
 
   render() {

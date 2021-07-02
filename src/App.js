@@ -3,6 +3,7 @@ import NavBar from "./components/navbar";
 import StartPage from "./components/StartPage/StartPage";
 import LoginPanel from "./components/loginPanel/loginPanel";
 import NewSchoolForm from "./components/newSchoolPage/newSchoolForm";
+import Chart from "./components/charting/chart";
 
 class App extends Component {
   state = {
@@ -27,7 +28,7 @@ class App extends Component {
   getSchool = async () => {
     console.log("getting school");
     let school_id;
-    if (document.cookie.length === 0) {
+    if (document.cookie.length == 0) {
       console.log("cookie length = 0");
       return;
     } else {
@@ -60,7 +61,6 @@ class App extends Component {
           <NavBar />
           <main className="container">
             <LoginPanel />
-            <NewSchoolForm />
           </main>
         </React.Fragment>
       );
@@ -69,12 +69,11 @@ class App extends Component {
         <React.Fragment>
           <NavBar />
           <main className="container">
-            {
-              <StartPage
-                school={this.state.school}
-                students={this.state.students}
-              />
-            }
+            <Chart />
+            <StartPage
+              school={this.state.school}
+              students={this.state.students}
+            />
           </main>
         </React.Fragment>
       );

@@ -38,6 +38,9 @@ class NewStudentForm extends Component {
             type="cancel"
             className="btn btn-danger btn-lg m-2"
             style={{ width: "20%" }}
+            onClick={(e) => {
+              e.preventDefault();
+            }}
           >
             Cancel
           </button>

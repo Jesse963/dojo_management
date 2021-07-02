@@ -6,10 +6,6 @@ const querystring = require("querystring");
 const router = require("./api");
 
 exports.submitStudent = async (req, res) => {
-  console.log("entered submit student");
-
-  console.log(req.query);
-
   try {
     const newStudent = req.body;
     const studentEntry = new Student({
@@ -28,12 +24,15 @@ exports.submitStudent = async (req, res) => {
       message: `Error adding new student to database: ${error}`,
     });
   }
-  return res.redirect(200, "back");
+  res.location("/");
+  res.send(302);
 };
 
 exports.getStudents = async (req, res) => {
-  const school_id = req.headers.cookie.split("=")[1];
-  console.log(school_id);
+  let school_id;
+  if (req.headers.cookie) {
+    school_id = req.headers.cookie.split("=")[1];
+  }
   let students;
   try {
     students = await Student.find({ school: school_id });
@@ -44,18 +43,21 @@ exports.getStudents = async (req, res) => {
     });
   }
   console.log("found students, returning");
-  res.status(200).json({
+  res.location("/").json({
     result: students,
     message: "Students found",
     success: true,
   });
+  // res.location("/");
+  // res.send(302);
 };
 
 exports.uploadAttendance = async (req, res) => {
   console.log("entered upload attendance");
+  school_id = req.headers.cookie.split("school_id=")[1];
   try {
     attendance = new Attendance({
-      school: "Mushin Goju Ryu Karate Academy",
+      school: school_id,
       date: new Date(),
       classType: "Standard",
       attendees: req.body,
@@ -150,5 +152,31 @@ exports.getSchool = async (req, res) => {
   });
 };
 
+exports.getAttendance = async (req, res) => {
+  console.log("Entered get attendance");
+  let attendances;
+  const school_id = req.body.school;
+  const fullName = req.body.name;
+
+  console.log(school_id, fullName);
+
+  try {
+    attendances = await Attendance.find({
+      school: school_id,
+      attendees: fullName,
+    });
+    console.log(attendances);
+  } catch (error) {
+    return res.status(400).json({
+      error: true,
+      message: "Error getting attendance from database - " + error,
+    });
+  } //finally
+  return res.status(200).json({
+    result: attendances,
+    message: "Retrieved Attendance successfully",
+    success: true,
+  });
+};
 //~~~~~ FIND A COOKIE
 //document.cookie.split(";").filter(item => item.trim().startsWith(`${key}=`))

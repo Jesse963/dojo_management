@@ -7,6 +7,7 @@ const {
   getStudents,
   addNewSchool,
   login,
+  getAttendance,
 } = require("./databaseUploads");
 
 router.get("/getStudents", getStudents);
@@ -15,5 +16,6 @@ router.post("/login", login);
 router.post("/submit_student", submitStudent);
 router.post("/uploadAttendance", uploadAttendance);
 router.post("/addNewSchool", addNewSchool);
+router.post("/getAttendance", getAttendance);
 
 module.exports = router;

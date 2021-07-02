@@ -1,10 +1,14 @@
 import React, { Component } from "react";
+import reactDom from "react-dom";
 import "../core.css";
+import NewSchoolForm from "../newSchoolPage/newSchoolForm";
 
 class LoginPanel extends Component {
   state = {};
+
   createAccount(e) {
     e.preventDefault();
+    reactDom.render(<NewSchoolForm />, document.querySelector(".container"));
   }
 
   render() {
