@@ -35,7 +35,7 @@ class Students extends Component {
   render() {
     return (
       <div
-        className="attendance selection panel"
+        className="attendance selection panel shadow-lg p-3 mb-5 bg-white rounded"
         style={{
           marginTop: "15%",
           padding: "15px",
@@ -43,7 +43,6 @@ class Students extends Component {
           height: "100%",
           textAlign: "center",
         }}
-        className="shadow-lg p-3 mb-5 bg-white rounded"
       >
         <h1 className="m-3">Select Attending Students</h1>
         <div style={{ display: "flex", flexDirection: "row" }}>

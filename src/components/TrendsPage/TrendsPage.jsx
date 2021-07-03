@@ -1,4 +1,3 @@
-import { stringTypeAnnotation } from "@babel/types";
 import React, { Component } from "react";
 import AttendanceGraph from "./attendanceGraph";
 import StudentsOverview from "./StudentsOverview";

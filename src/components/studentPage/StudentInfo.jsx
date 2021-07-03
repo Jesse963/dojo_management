@@ -3,7 +3,6 @@ import React, { Component } from "react";
 class StudentInfo extends Component {
   state = {};
   render() {
-    console.log("Student Info props: ", this.props);
     return (
       <div
         className="left panel"

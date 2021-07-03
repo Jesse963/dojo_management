@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import NewStudentForm from "./NewSudentForm";
 import ReactDOM from "react-dom";
-import StudentDetails from "../studentPage/StudentDetails";
 import StudentSelection from "../studentPage/StudentSelection";
 
 class AdminPage extends Component {
@@ -9,7 +8,7 @@ class AdminPage extends Component {
   render() {
     return (
       <div
-        className="startPageContainer"
+        className="startPageContainer shadow-lg p-3 mb-5 bg-white rounded"
         style={{
           marginTop: "15%",
           padding: "15px",
@@ -19,7 +18,6 @@ class AdminPage extends Component {
           justifyContent: "center",
           height: "100%",
         }}
-        className="shadow-lg p-3 mb-5 bg-white rounded"
       >
         <h1 className="m-3" style={{ textAlign: "center" }}>
           Admin Options
@@ -39,7 +37,10 @@ class AdminPage extends Component {
           className="btn btn-primary btn-lg m-2"
           onClick={() =>
             ReactDOM.render(
-              <StudentSelection students={this.props.students} />,
+              <StudentSelection
+                students={this.props.students}
+                school={this.props.school}
+              />,
               document.querySelector(".container")
             )
           }

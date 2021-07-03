@@ -54,7 +54,7 @@ exports.getStudents = async (req, res) => {
 
 exports.uploadAttendance = async (req, res) => {
   console.log("entered upload attendance");
-  school_id = req.headers.cookie.split("school_id=")[1];
+  school_id = req.headers.cookie.split("school_id=")[1].split("=")[0];
   try {
     attendance = new Attendance({
       school: school_id,
@@ -152,7 +152,7 @@ exports.getSchool = async (req, res) => {
   });
 };
 
-exports.getAttendance = async (req, res) => {
+exports.getStudentAttendance = async (req, res) => {
   console.log("Entered get attendance");
   let attendances;
   const school_id = req.body.school;
@@ -178,5 +178,22 @@ exports.getAttendance = async (req, res) => {
     success: true,
   });
 };
-//~~~~~ FIND A COOKIE
-//document.cookie.split(";").filter(item => item.trim().startsWith(`${key}=`))
+
+exports.getFullAttendance = async (req, res) => {
+  console.log("Entered get full attendance");
+  let attendances;
+  const school_id = req.body.school;
+  try {
+    attendances = await Attendance.find({ school: school_id });
+  } catch (error) {
+    return res.status(400).json({
+      error: true,
+      message: "Error getting attendance from database - " + error,
+    });
+  } //finally
+  return res.status(200).json({
+    result: attendances,
+    message: "Retrieved Attendance successfully",
+    success: true,
+  });
+};

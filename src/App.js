@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import NavBar from "./components/navbar";
 import StartPage from "./components/StartPage/StartPage";
 import LoginPanel from "./components/loginPanel/loginPanel";
-import NewSchoolForm from "./components/newSchoolPage/newSchoolForm";
-import Chart from "./components/charting/chart";
+import NoteComponent from "./components/studentPage/NoteComponent";
 
 class App extends Component {
   state = {
@@ -69,7 +68,6 @@ class App extends Component {
         <React.Fragment>
           <NavBar />
           <main className="container">
-            <Chart />
             <StartPage
               school={this.state.school}
               students={this.state.students}

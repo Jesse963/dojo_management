@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import Students from "../NewClassPage/students";
-import StudentDetails from "../studentPage/StudentDetails";
 import AdminPage from "../AdminPage/AdminPage";
 import TrendsPage from "../TrendsPage/TrendsPage";
 import "../core.css";

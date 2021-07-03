@@ -8,15 +8,16 @@ class StudentSelection extends Component {
   state = {};
 
   navigateToStudent = (student) => {
-    console.log("Navigated to Student: ", student.name);
     ReactDOM.render(
-      <StudentDetails student={student} />,
+      <StudentDetails
+        student={student}
+        totalStudents={this.props.students.length}
+      />,
       document.querySelector(".container")
     );
   };
 
   render() {
-    console.log(this.props.students);
     return (
       <div
         className="page container shadow-lg p-3 mb-5 bg-white rounded"

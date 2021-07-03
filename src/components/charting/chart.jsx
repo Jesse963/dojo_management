@@ -1,47 +1,42 @@
 import React, { Component } from "react";
-import { Bar } from "react-chartjs-2";
+import { Bar, Line } from "react-chartjs-2";
 
 class Chart extends React.Component {
+  componentDidMount() {
+    console.log(this.props);
+  }
+
   state = {
-    labels: [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ],
     datasets: [
       {
-        label: "Rainfall",
-        backgroundColor: "rgba(75,192,192,1)",
+        backgroundColor: "#007bff",
         borderColor: "rgba(0,0,0,1)",
-        borderWidth: 2,
-        data: [65, 59, 80, 81, 56],
+        data: [this.props.student, this.props.average],
       },
     ],
+    labels: ["Student", "Average"],
   };
 
   render() {
+    console.log(this.props.student);
+
     return (
       <div>
         <Bar
           data={this.state}
+          style={{
+            background: "white",
+            maxHeight: "25vh",
+            maxWidth: "80%",
+            marginLeft: "10%",
+          }}
           options={{
-            title: {
-              display: true,
-              text: "Average Rainfall per month",
-              fontSize: 20,
-            },
-            legend: {
-              display: true,
-              position: "right",
+            plugins: {
+              title: {
+                display: true,
+                text: "Student Attendance vs Average",
+                fontSize: 20,
+              },
             },
           }}
         />
@@ -49,5 +44,4 @@ class Chart extends React.Component {
     );
   }
 }
-
 export default Chart;

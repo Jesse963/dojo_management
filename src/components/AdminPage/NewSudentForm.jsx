@@ -12,19 +12,30 @@ class NewStudentForm extends Component {
       >
         <div style={{ paddingLeft: "5%", paddingRight: "5%" }}>
           <h1 style={{ textAlign: "center" }}>Enter New Student Details</h1>
-          <p>First Name:</p>
-          <input name="first_name" type="text" style={{ width: "100%" }} />
-          <p>Last Name:</p>
-          <input name="last_name" type="text" style={{ width: "100%" }} />
-          <p>Date of Birth:</p>
-          <input name="dob" type="text" style={{ width: "100%" }} />
-          <p>Phone Number:</p>
-          <input name="phone" type="text" style={{ width: "100%" }} />
-          <p>Address:</p>
-          <input name="address" type="text" style={{ width: "100%" }} />
-          <p>Email:</p>
-          <input name="email" type="text" style={{ width: "100%" }} />
-          <p></p>
+          <p>
+            First Name:
+            <input name="first_name" type="text" style={{ width: "100%" }} />
+          </p>
+          <p>
+            Last Name:
+            <input name="last_name" type="text" style={{ width: "100%" }} />
+          </p>
+          <p>
+            Date of Birth:
+            <input name="dob" type="text" style={{ width: "100%" }} />
+          </p>
+          <p>
+            Phone Number:
+            <input name="phone" type="text" style={{ width: "100%" }} />
+          </p>
+          <p>
+            Address:
+            <input name="address" type="text" style={{ width: "100%" }} />
+          </p>
+          <p>
+            Email:
+            <input name="email" type="text" style={{ width: "100%" }} />
+          </p>
         </div>
         <div style={{ textAlign: "center" }}>
           <button

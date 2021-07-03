@@ -2,6 +2,9 @@ import React, { Component } from "react";
 
 class NewSchoolForm extends Component {
   state = {};
+  cancel(e) {
+    e.preventdefault();
+  }
   render() {
     return (
       <form
@@ -12,21 +15,34 @@ class NewSchoolForm extends Component {
       >
         <div style={{ paddingLeft: "5%", paddingRight: "5%" }}>
           <h1 style={{ textAlign: "center" }}>Welcome</h1>
-          <p>Name of School:</p>
-          <input name="school_name" type="text" style={{ width: "100%" }} />
-          <p>Email:</p>
-          <input name="email" type="text" style={{ width: "100%" }} />
-          <p>First Name:</p>
-          <input name="first_name" type="text" style={{ width: "100%" }} />
-          <p>Last Name:</p>
-          <input name="last_name" type="text" style={{ width: "100%" }} />
-          <p>Phone:</p>
-          <input name="phone" type="text" style={{ width: "100%" }} />
-          <p>Postcode:</p>
-          <input name="postcode" type="number" style={{ width: "100%" }} />
-          <p>Password:</p>
-          <input name="password" type="password" style={{ width: "100%" }} />
-          <p></p>
+          <p>
+            Name of School:
+            <input name="school_name" type="text" style={{ width: "100%" }} />
+          </p>
+          <p>
+            Email:
+            <input name="email" type="text" style={{ width: "100%" }} />
+          </p>
+          <p>
+            First Name:
+            <input name="first_name" type="text" style={{ width: "100%" }} />
+          </p>
+          <p>
+            Last Name:
+            <input name="last_name" type="text" style={{ width: "100%" }} />
+          </p>
+          <p>
+            Phone:
+            <input name="phone" type="text" style={{ width: "100%" }} />
+          </p>
+          <p>
+            Postcode:
+            <input name="postcode" type="number" style={{ width: "100%" }} />
+          </p>
+          <p>
+            Password:
+            <input name="password" type="password" style={{ width: "100%" }} />
+          </p>
         </div>
         <div style={{ textAlign: "center" }}>
           <button
@@ -40,6 +56,7 @@ class NewSchoolForm extends Component {
             type="cancel"
             className="btn btn-danger btn-lg m-2"
             style={{ width: "20%" }}
+            onClick={this.cancel}
           >
             Cancel
           </button>

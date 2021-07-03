@@ -14,7 +14,6 @@ class StudentSelectionButton extends Component {
   };
 
   render() {
-    console.log(this.props);
     return (
       <li>
         <button onClick={this.handleClick} className="btn m-2 btn-outline-dark">
