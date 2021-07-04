@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import NavBar from "./components/navbar";
 import StartPage from "./components/StartPage/StartPage";
 import LoginPanel from "./components/loginPanel/loginPanel";
-import NoteComponent from "./components/studentPage/NoteComponent";
+import StudentTrend from "./components/TrendsPage/StudentInfoComponent";
+import NoteForm from "./components/studentPage/notesForm";
 
 class App extends Component {
   state = {
@@ -31,10 +32,7 @@ class App extends Component {
       console.log("cookie length = 0");
       return;
     } else {
-      school_id = document.cookie.split(";")[0].split("=")[1];
-
-      console.log(school_id);
-
+      school_id = document.cookie.split("school_id=")[1].split("=")[0];
       const options = {
         method: "POST",
         headers: { "Content-Type": "application/json" },

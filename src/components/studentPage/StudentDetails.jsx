@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import StudentInfo from "./StudentInfo";
 import StudentPerformance from "./StudentPerformance";
-import NoteComponent from "./NoteComponent";
 
 class StudentDetails extends Component {
   state = {};
@@ -50,35 +49,6 @@ class StudentDetails extends Component {
   }
 
   render() {
-    const testNotes = [
-      {
-        author: "Jesse ",
-        date: "3/7/21",
-        content: "This is a test note",
-      },
-      {
-        author: "Andy",
-        date: "3/7/21",
-        content:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      },
-      {
-        author: "Jesse Jenkins",
-        date: "3/7/21",
-        content: "This is a test note",
-      },
-      {
-        author: " Jenkins",
-        date: "3/7/21",
-        content: "This is a test note",
-      },
-      {
-        author: "Jess Jenkin",
-        date: "3/7/21",
-        content: "This is a test note",
-      },
-    ];
-
     return (
       <div
         className="page container shadow-lg p-3 mb-5 bg-white rounded"
@@ -89,7 +59,6 @@ class StudentDetails extends Component {
           student={this.props.student}
           studentAttendance={this.state.studentAttendance}
           averageAttendancePerStudent={this.state.averageAttendancePerStudent}
-          notes={testNotes}
         />
       </div>
     );

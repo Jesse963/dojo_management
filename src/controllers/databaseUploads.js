@@ -1,8 +1,9 @@
+const { computeHeadingLevel } = require("@testing-library/react");
 const { v4: uuidv4 } = require("uuid");
 const Attendance = require("../models/attendanceSchema");
+const Note = require("../models/notesSchema");
 const School = require("../models/schoolSchema");
 const Student = require("../models/studentSchema");
-const querystring = require("querystring");
 const router = require("./api");
 
 exports.submitStudent = async (req, res) => {
@@ -31,7 +32,7 @@ exports.submitStudent = async (req, res) => {
 exports.getStudents = async (req, res) => {
   let school_id;
   if (req.headers.cookie) {
-    school_id = req.headers.cookie.split("=")[1];
+    school_id = req.headers.cookie.split("school_id=")[1].split("=")[0];
   }
   let students;
   try {
@@ -98,7 +99,7 @@ exports.addNewSchool = async (req, res) => {
       error,
     });
   } //finally
-  console.log("Successful Upload");
+  console.log(`You have added a new school with id: ${school_id}`);
   res.cookie(`school_id=${school_id}`);
   res.location("/");
   res.send(302);
@@ -172,17 +173,22 @@ exports.getStudentAttendance = async (req, res) => {
       message: "Error getting attendance from database - " + error,
     });
   } //finally
-  return res.status(200).json({
-    result: attendances,
-    message: "Retrieved Attendance successfully",
-    success: true,
-  });
+  if (req.body.fromServer) {
+    return attendances;
+  } else {
+    return res.status(200).json({
+      result: attendances,
+      message: "Retrieved Attendance successfully",
+      success: true,
+    });
+  }
 };
 
 exports.getFullAttendance = async (req, res) => {
   console.log("Entered get full attendance");
   let attendances;
   const school_id = req.body.school;
+  console.log("school_id from getFullAttendance: ", school_id);
   try {
     attendances = await Attendance.find({ school: school_id });
   } catch (error) {
@@ -191,8 +197,93 @@ exports.getFullAttendance = async (req, res) => {
       message: "Error getting attendance from database - " + error,
     });
   } //finally
+  if (req.body.fromServer) {
+    return attendances;
+  } else {
+    return res.status(200).json({
+      result: attendances,
+      message: "Retrieved Attendance successfully",
+      success: true,
+    });
+  }
+};
+
+exports.calculateFullAttendancePercentages = async (req, res) => {
+  console.log("school ID: ", req.body.students[0].school);
+  let attendancePercentages = {};
+
+  try {
+    //Collect total number of classes for the particular school
+    const schoolCount = await this.getFullAttendance({
+      body: { school: req.body.students[0].school, fromServer: true },
+    });
+    const totalClasses = schoolCount.length;
+
+    //Collect attendance information for each individual student - student/total = % of classes attended
+    await req.body.students.forEach(async (student, i) => {
+      const attendances = await this.getStudentAttendance({
+        body: { school: student.school, name: student.name, fromServer: true },
+      });
+      attendancePercentages[student.name] =
+        (100 * attendances.length) / totalClasses;
+
+      if (i == req.body.students.length - 1) {
+        return res.status(200).json({
+          result: attendancePercentages,
+          message: "Is this the one?",
+          success: true,
+        });
+      }
+    });
+    console.log("attendance count: ", attendancePercentages);
+  } catch (error) {
+    return res.status(400).json({
+      error: true,
+      message: "Error getting attendance from database - " + error,
+    });
+  }
+};
+
+exports.postNote = async (req, res) => {
+  console.log(req.body);
+  console.log(req.query);
+  try {
+    note = new Note({
+      content: req.body.content,
+      school: req.query.school_id,
+      student: req.query.student_id,
+    });
+    await note.save();
+  } catch (error) {
+    return res.status(400).json({
+      error: true,
+      message: "Error uploading note - " + error,
+      error,
+    });
+  } //finally
+  res.location("/");
+  res.send(302);
+};
+
+exports.getNotes = async (req, res) => {
+  console.log("Entered get notes");
+  const school_id = req.body.student.school;
+  const fullName = req.body.student.name;
+  let notes;
+  try {
+    notes = await Note.find({
+      school: school_id,
+      student: fullName,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      error: true,
+      message: "Error getting attendance from database - " + error,
+    });
+  } //finally
+
   return res.status(200).json({
-    result: attendances,
+    result: notes,
     message: "Retrieved Attendance successfully",
     success: true,
   });

@@ -5,8 +5,13 @@ let NotesSchema = mongoose.Schema(
     author: {
       type: String,
       required: true,
+      default: "Admin",
     },
     student: {
+      type: String,
+      required: true,
+    },
+    school: {
       type: String,
       required: true,
     },
@@ -15,7 +20,7 @@ let NotesSchema = mongoose.Schema(
       required: true,
     },
     date: {
-      type: String,
+      type: Date,
       required: true,
       default: new Date(),
     },

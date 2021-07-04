@@ -11,7 +11,10 @@ class TrendsPage extends Component {
         style={{ display: "flex", flexDirection: "row", marginTop: "10%" }}
       >
         <div className="left panel" style={{ height: "10px", width: "25%" }}>
-          <StudentsOverview students={this.props.students} />
+          <StudentsOverview
+            students={this.props.students}
+            school={this.props.school}
+          />
         </div>
         <div className="right panel" style={{ width: "75%" }}>
           <AttendanceGraph timeframe={1} />

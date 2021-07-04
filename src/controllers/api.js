@@ -9,6 +9,9 @@ const {
   login,
   getStudentAttendance,
   getFullAttendance,
+  calculateFullAttendancePercentages,
+  postNote,
+  getNotes,
 } = require("./databaseUploads");
 
 router.get("/getStudents", getStudents);
@@ -19,5 +22,11 @@ router.post("/uploadAttendance", uploadAttendance);
 router.post("/addNewSchool", addNewSchool);
 router.post("/getStudentAttendance", getStudentAttendance);
 router.post("/getFullAttendance", getFullAttendance);
+router.post(
+  "/calculateFullAttendancePercentages",
+  calculateFullAttendancePercentages
+);
+router.post("/postNote", postNote);
+router.post("/getNotes", getNotes);
 
 module.exports = router;

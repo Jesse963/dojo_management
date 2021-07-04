@@ -21,7 +21,7 @@ class StartPage extends Component {
   navigateToTrends = () => {
     console.log("Navigated to Trends");
     ReactDOM.render(
-      <TrendsPage students={this.props.students} />,
+      <TrendsPage students={this.props.students} school={this.props.school} />,
       document.querySelector(".container")
     );
   };

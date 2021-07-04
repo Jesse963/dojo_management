@@ -1,10 +1,39 @@
 import React, { Component } from "react";
 import Chart from "../charting/chart";
 import NoteComponent from "./NoteComponent";
+import reactDom from "react-dom";
+import NoteForm from "./notesForm";
 
 class StudentPerformance extends Component {
   state = {};
+
+  toggleNoteSubmissionPanel() {
+    reactDom.render(
+      <NoteForm student={this.props.student} />,
+      document.querySelector(".student.notes")
+    );
+    console.log("attempting to render");
+  }
+
+  componentDidMount() {
+    this.getNotes();
+  }
+  getNotes = async () => {
+    const options = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ student: this.props.student }),
+    };
+    const response = await fetch("/api/getNotes", options);
+    const notes = await response.json();
+    this.setState({ notes: notes.result });
+    console.log(notes);
+  };
+
   render() {
+    if (!this.state.notes) {
+      return null;
+    }
     return (
       <div className="right panel ml-5" style={{ textAlign: "center" }}>
         <h1>Attendance</h1>
@@ -26,6 +55,7 @@ class StudentPerformance extends Component {
             border: "1px solid black",
             height: "30vh",
             maxWidth: "45vw",
+            width: "45vw",
           }}
         >
           <div
@@ -33,12 +63,17 @@ class StudentPerformance extends Component {
             style={{ height: "75%", overflowY: "auto" }}
           >
             {/* <NoteComponent content={"test"} /> */}
-            {this.props.notes.map((note) => (
+            {this.state.notes.map((note) => (
               <NoteComponent note={note} />
             ))}
           </div>
           <div className="control panel">
-            <button className="btn btn-primary m-2">Add Note</button>
+            <button
+              className="btn btn-primary m-2"
+              onClick={() => this.toggleNoteSubmissionPanel()}
+            >
+              Add Note
+            </button>
             <button className="btn btn-primary m-2">Edit Notes</button>
           </div>
         </div>
