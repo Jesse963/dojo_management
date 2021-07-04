@@ -27,7 +27,6 @@ class StudentPerformance extends Component {
     const response = await fetch("/api/getNotes", options);
     const notes = await response.json();
     this.setState({ notes: notes.result });
-    console.log(notes);
   };
 
   render() {
@@ -44,6 +43,7 @@ class StudentPerformance extends Component {
           }}
         >
           <Chart
+            name={this.props.student.name}
             student={this.props.studentAttendance}
             average={this.props.averageAttendancePerStudent}
           />
@@ -55,14 +55,13 @@ class StudentPerformance extends Component {
             border: "1px solid black",
             height: "30vh",
             maxWidth: "45vw",
-            width: "45vw",
+            width: "35vw",
           }}
         >
           <div
             className="notes content m-2"
             style={{ height: "75%", overflowY: "auto" }}
           >
-            {/* <NoteComponent content={"test"} /> */}
             {this.state.notes.map((note) => (
               <NoteComponent note={note} />
             ))}

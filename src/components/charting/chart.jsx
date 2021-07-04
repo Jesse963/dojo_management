@@ -14,12 +14,10 @@ class Chart extends React.Component {
         data: [this.props.student, this.props.average],
       },
     ],
-    labels: ["Student", "Average"],
+    labels: [this.props.name, "Average"],
   };
 
   render() {
-    console.log(this.props.student);
-
     return (
       <div>
         <Bar
@@ -37,6 +35,7 @@ class Chart extends React.Component {
                 text: "Student Attendance vs Average",
                 fontSize: 20,
               },
+              legend: { display: false },
             },
           }}
         />

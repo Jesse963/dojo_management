@@ -17,7 +17,7 @@ class NoteForm extends Component {
         <textarea
           name="content"
           id="noteContent"
-          style={{ width: "100%", height: "70%" }}
+          style={{ height: "70%" }}
           wrap="hard"
           rows="8"
           columns="2"

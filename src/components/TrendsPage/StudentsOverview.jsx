@@ -43,6 +43,7 @@ class StudentsOverview extends Component {
                   attendancePercentage={
                     this.state.fullAttendanceArray[student.name]
                   }
+                  totalStudents={this.props.students.length}
                 />
               );
             })}

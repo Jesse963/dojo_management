@@ -35,6 +35,8 @@ class StudentDetails extends Component {
       studentAttendance: studentAttendance.result.length,
       averageAttendancePerStudent: averageAttendancePerStudent,
     });
+    console.log(fullAttendance.result.length);
+
     console.log(
       this.props.full_name +
         " has attended " +
@@ -49,6 +51,9 @@ class StudentDetails extends Component {
   }
 
   render() {
+    if (!this.state.studentAttendance) {
+      return null;
+    }
     return (
       <div
         className="page container shadow-lg p-3 mb-5 bg-white rounded"

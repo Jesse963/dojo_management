@@ -8,7 +8,10 @@ class StudentTrend extends Component {
   clickHandler() {
     console.log(this.props.student.name);
     reactDom.render(
-      <StudentDetails student={this.props.student} />,
+      <StudentDetails
+        student={this.props.student}
+        totalStudents={this.props.totalStudents}
+      />,
       document.querySelector(".container")
     );
   }
