@@ -4,6 +4,15 @@ import Student from "./student.jsx";
 class Students extends Component {
   state = {
     currentAttendance: [],
+    students: this.props.students,
+  };
+
+  studentSearchOnChange = (event) => {
+    this.setState({
+      students: this.props.students.filter((student) =>
+        student.name.toLowerCase().includes(event.target.value)
+      ),
+    });
   };
 
   // add student to attending students array
@@ -16,8 +25,6 @@ class Students extends Component {
     }
     this.setState({ currentAttendance: currentlyAttending });
     console.log(this.state.currentAttendance.length);
-    // const test = selected ? "is not selected" : "is selected";
-    // console.log(`${student} ${test} ${selected}`);
   };
 
   submitAttendance = async () => {
@@ -47,27 +54,21 @@ class Students extends Component {
         <h1 className="m-3">Select Attending Students</h1>
         <div style={{ display: "flex", flexDirection: "row" }}>
           <div
-            className="left panel"
-            style={{
-              width: "66%",
-              textAlign: "start",
-              marginBottom: "5%",
-              marginLeft: "5%",
-            }}
+            className="left panel mb-5"
+            style={{ width: "66%", alignItems: "center" }}
           >
-            <div className="filter selections">
-              Select Filters
-              <input
-                type="text"
-                name="studentSearch"
-                id="studentSearch"
-                className="m-3"
-              />
-            </div>
+            <input
+              onChange={this.studentSearchOnChange}
+              type="text"
+              name="studentSearch"
+              id="studentSearch"
+              className="form-control m-3"
+              placeholder="Search for a student"
+              style={{ width: "80%" }}
+            />
             <div
               className="mapped students"
               style={{
-                // webkitscr
                 maxHeight: "40vh",
                 overflow: "auto",
               }}
@@ -79,9 +80,9 @@ class Students extends Component {
                   textAlign: "center",
                 }}
               >
-                {this.props.students.map((student) => (
+                {this.state.students.map((student, i) => (
                   <Student
-                    key={student.name}
+                    key={i}
                     name={student.name}
                     grade={student.grade}
                     addStudentToAttending={this.addStudentToAttending}
@@ -99,7 +100,7 @@ class Students extends Component {
               marginRight: "5%",
             }}
           >
-            <div className="controls">
+            <div className="controls" style={{ height: "80%" }}>
               <h2 className="m-3">
                 {this.state.currentAttendance.length} students selected
               </h2>
@@ -112,6 +113,14 @@ class Students extends Component {
               <button className="btn btn-primary btn-lg m-3">
                 Submit for Another Date
               </button>
+              <div>
+                <button
+                  className="btn btn-primary btn-lg m-2"
+                  onClick={() => (window.location.href = "/")}
+                >
+                  Home
+                </button>
+              </div>
             </div>
           </div>
         </div>

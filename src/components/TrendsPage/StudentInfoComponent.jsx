@@ -17,6 +17,13 @@ class StudentTrend extends Component {
   }
 
   render() {
+    let studentName;
+    console.log(typeof this.props.student.length);
+    if (typeof this.props.student === "string") {
+      studentName = this.props.student;
+    } else {
+      studentName = this.props.student.name;
+    }
     return (
       <div
         className="student info"
@@ -29,9 +36,7 @@ class StudentTrend extends Component {
         }}
         onClick={() => this.clickHandler()}
       >
-        <h5 style={{ maxWidth: "80%", width: "80%" }}>
-          {this.props.student.name}
-        </h5>
+        <h5 style={{ maxWidth: "80%", width: "80%" }}>{studentName}</h5>
         <h5>{Math.round(100 * this.props.attendancePercentage) / 100}%</h5>
       </div>
     );

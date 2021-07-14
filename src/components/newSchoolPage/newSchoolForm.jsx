@@ -17,31 +17,66 @@ class NewSchoolForm extends Component {
           <h1 style={{ textAlign: "center" }}>Welcome</h1>
           <p>
             Name of School:
-            <input name="school_name" type="text" style={{ width: "100%" }} />
+            <input
+              name="school_name"
+              type="text"
+              style={{ width: "100%" }}
+              class="form-control"
+            />
           </p>
           <p>
             Email:
-            <input name="email" type="text" style={{ width: "100%" }} />
+            <input
+              name="email"
+              type="text"
+              style={{ width: "100%" }}
+              class="form-control"
+            />
           </p>
           <p>
             First Name:
-            <input name="first_name" type="text" style={{ width: "100%" }} />
+            <input
+              name="first_name"
+              type="text"
+              style={{ width: "100%" }}
+              class="form-control"
+            />
           </p>
           <p>
             Last Name:
-            <input name="last_name" type="text" style={{ width: "100%" }} />
+            <input
+              name="last_name"
+              type="text"
+              style={{ width: "100%" }}
+              class="form-control"
+            />
           </p>
           <p>
             Phone:
-            <input name="phone" type="text" style={{ width: "100%" }} />
+            <input
+              name="phone"
+              type="text"
+              style={{ width: "100%" }}
+              class="form-control"
+            />
           </p>
           <p>
             Postcode:
-            <input name="postcode" type="number" style={{ width: "100%" }} />
+            <input
+              name="postcode"
+              type="number"
+              style={{ width: "100%" }}
+              class="form-control"
+            />
           </p>
           <p>
             Password:
-            <input name="password" type="password" style={{ width: "100%" }} />
+            <input
+              name="password"
+              type="password"
+              style={{ width: "100%" }}
+              class="form-control"
+            />
           </p>
         </div>
         <div style={{ textAlign: "center" }}>

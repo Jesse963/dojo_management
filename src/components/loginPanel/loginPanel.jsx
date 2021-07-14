@@ -29,11 +29,21 @@ class LoginPanel extends Component {
           <h1 style={{ textAlign: "center" }}>Login</h1>
           <p>
             Email:
-            <input name="email" type="text" style={{ width: "100%" }} />
+            <input
+              name="email"
+              type="text"
+              style={{ width: "100%" }}
+              class="form-control"
+            />
           </p>
           <p>
             Password:
-            <input name="password" type="password" style={{ width: "100%" }} />
+            <input
+              name="password"
+              type="password"
+              style={{ width: "100%" }}
+              class="form-control"
+            />
             <a href="">Forgot your password?</a>
           </p>
         </div>

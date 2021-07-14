@@ -36,7 +36,7 @@ exports.getStudents = async (req, res) => {
   }
   let students;
   try {
-    students = await Student.find({ school: school_id });
+    students = await Student.find({ school: school_id }).sort({ name: 1 });
   } catch (error) {
     return res.status(400).json({
       error: true,

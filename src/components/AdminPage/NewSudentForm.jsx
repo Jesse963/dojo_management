@@ -14,27 +14,57 @@ class NewStudentForm extends Component {
           <h1 style={{ textAlign: "center" }}>Enter New Student Details</h1>
           <p>
             First Name:
-            <input name="first_name" type="text" style={{ width: "100%" }} />
+            <input
+              name="first_name"
+              type="text"
+              style={{ width: "100%" }}
+              class="form-control"
+            />
           </p>
           <p>
             Last Name:
-            <input name="last_name" type="text" style={{ width: "100%" }} />
+            <input
+              name="last_name"
+              type="text"
+              style={{ width: "100%" }}
+              class="form-control"
+            />
           </p>
           <p>
             Date of Birth:
-            <input name="dob" type="text" style={{ width: "100%" }} />
+            <input
+              name="dob"
+              type="text"
+              style={{ width: "100%" }}
+              class="form-control"
+            />
           </p>
           <p>
             Phone Number:
-            <input name="phone" type="text" style={{ width: "100%" }} />
+            <input
+              name="phone"
+              type="text"
+              style={{ width: "100%" }}
+              class="form-control"
+            />
           </p>
           <p>
             Address:
-            <input name="address" type="text" style={{ width: "100%" }} />
+            <input
+              name="address"
+              type="text"
+              style={{ width: "100%" }}
+              class="form-control"
+            />
           </p>
           <p>
             Email:
-            <input name="email" type="text" style={{ width: "100%" }} />
+            <input
+              name="email"
+              type="text"
+              style={{ width: "100%" }}
+              class="form-control"
+            />
           </p>
         </div>
         <div style={{ textAlign: "center" }}>
@@ -51,6 +81,7 @@ class NewStudentForm extends Component {
             style={{ width: "20%" }}
             onClick={(e) => {
               e.preventDefault();
+              window.location.href = "/";
             }}
           >
             Cancel

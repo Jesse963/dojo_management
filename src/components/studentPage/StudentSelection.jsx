@@ -61,7 +61,12 @@ class StudentSelection extends Component {
             style={{ width: "100%", textAlign: "center" }}
           >
             <button className="btn btn-primary btn-lg m-2">Edit</button>
-            <button className="btn btn-primary btn-lg m-2">Home</button>
+            <button
+              className="btn btn-primary btn-lg m-2"
+              onClick={() => (window.location.href = "/")}
+            >
+              Home
+            </button>
             <button className="btn btn-primary btn-lg m-2">Back</button>
           </div>
         </div>
