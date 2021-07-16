@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import NavBar from "./components/navbar";
 import StartPage from "./components/StartPage/StartPage";
 import LoginPanel from "./components/loginPanel/loginPanel";
-import StudentTrend from "./components/TrendsPage/StudentInfoComponent";
-import NoteForm from "./components/studentPage/notesForm";
 
 class App extends Component {
   state = {

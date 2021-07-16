@@ -12,7 +12,10 @@ const {
   calculateFullAttendancePercentages,
   postNote,
   getNotes,
+  verifySchoolFromEmail,
 } = require("./databaseUploads");
+
+const { sendTestEmail } = require("./emailHandler");
 
 router.get("/getStudents", getStudents);
 router.post("/getSchool", getSchool);
@@ -28,5 +31,7 @@ router.post(
 );
 router.post("/postNote", postNote);
 router.post("/getNotes", getNotes);
+router.post("/verifySchoolFromEmail", verifySchoolFromEmail);
+router.post("/sendTestEmail", sendTestEmail);
 
 module.exports = router;

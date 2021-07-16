@@ -12,3 +12,8 @@
   background: url("backgroundImage.jpg");
   min-height: 100vh;
 }
+
+.hyperlink {
+  color: blue !important;
+  cursor: pointer;
+}

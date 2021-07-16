@@ -7,18 +7,28 @@ class StudentTrend extends Component {
 
   clickHandler() {
     console.log(this.props.student.name);
-    reactDom.render(
-      <StudentDetails
-        student={this.props.student}
-        totalStudents={this.props.totalStudents}
-      />,
-      document.querySelector(".container")
-    );
+    //prevent click through to student page from info -> classes -> attendees. aim to add later
+    if (this.props.displayAttendance !== false) {
+      reactDom.render(
+        <StudentDetails
+          student={this.props.student}
+          totalStudents={this.props.totalStudents}
+        />,
+        document.querySelector(".container")
+      );
+    }
+  }
+
+  checkDisplay() {
+    if (this.props.displayAttendance !== false) {
+      return (
+        <h5>{Math.round(100 * this.props.attendancePercentage) / 100}%</h5>
+      );
+    }
   }
 
   render() {
     let studentName;
-    console.log(typeof this.props.student.length);
     if (typeof this.props.student === "string") {
       studentName = this.props.student;
     } else {
@@ -37,7 +47,7 @@ class StudentTrend extends Component {
         onClick={() => this.clickHandler()}
       >
         <h5 style={{ maxWidth: "80%", width: "80%" }}>{studentName}</h5>
-        <h5>{Math.round(100 * this.props.attendancePercentage) / 100}%</h5>
+        {this.checkDisplay()}
       </div>
     );
   }

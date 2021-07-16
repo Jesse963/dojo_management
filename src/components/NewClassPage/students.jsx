@@ -1,5 +1,7 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import Student from "./student.jsx";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 class Students extends Component {
   state = {
@@ -15,6 +17,16 @@ class Students extends Component {
     });
   };
 
+  renderDatePicker() {
+    // const [startDate, setStartDate] = useState(new Date());
+    return (
+      <DatePicker
+        selected={new Date()}
+        // onChange={(date) => this.setState({ StartDate: date })}
+      />
+    );
+  }
+
   // add student to attending students array
   addStudentToAttending = (student, selected) => {
     let currentlyAttending = this.state.currentAttendance;
@@ -27,14 +39,17 @@ class Students extends Component {
     console.log(this.state.currentAttendance.length);
   };
 
-  submitAttendance = async () => {
+  submitAttendance = async (date) => {
     console.log(this.state.currentAttendance);
     const options = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(this.state.currentAttendance),
+      body: JSON.stringify({
+        students: this.state.currentAttendance,
+        date: date,
+      }),
     };
     await fetch("/api/uploadAttendance", options);
   };
@@ -105,13 +120,16 @@ class Students extends Component {
                 {this.state.currentAttendance.length} students selected
               </h2>
               <button
-                onClick={this.submitAttendance}
+                onClick={() => this.submitAttendance(new Date())}
                 className="btn btn-primary btn-lg m-3"
               >
                 Submit with Today's Date
               </button>
+              <p></p>
+              {this.renderDatePicker()}
+
               <button className="btn btn-primary btn-lg m-3">
-                Submit for Another Date
+                Submit with custom date
               </button>
               <div>
                 <button

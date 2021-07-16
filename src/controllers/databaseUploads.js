@@ -1,4 +1,3 @@
-const { computeHeadingLevel } = require("@testing-library/react");
 const { v4: uuidv4 } = require("uuid");
 const Attendance = require("../models/attendanceSchema");
 const Note = require("../models/notesSchema");
@@ -55,13 +54,14 @@ exports.getStudents = async (req, res) => {
 
 exports.uploadAttendance = async (req, res) => {
   console.log("entered upload attendance");
+  console.log(req.body);
   school_id = req.headers.cookie.split("school_id=")[1].split("=")[0];
   try {
     attendance = new Attendance({
       school: school_id,
-      date: new Date(),
+      date: req.body.date,
       classType: "Standard",
-      attendees: req.body,
+      attendees: req.body.students,
     });
     await attendance.save();
   } catch (error) {
@@ -190,7 +190,9 @@ exports.getFullAttendance = async (req, res) => {
   const school_id = req.body.school;
   console.log("school_id from getFullAttendance: ", school_id);
   try {
-    attendances = await Attendance.find({ school: school_id });
+    attendances = await Attendance.find({ school: school_id }).sort({
+      date: -1,
+    });
   } catch (error) {
     return res.status(400).json({
       error: true,
@@ -285,6 +287,25 @@ exports.getNotes = async (req, res) => {
   return res.status(200).json({
     result: notes,
     message: "Retrieved Attendance successfully",
+    success: true,
+  });
+};
+
+exports.verifySchoolFromEmail = async (req, res) => {
+  console.log("Verify School from email - ", req.body);
+  let school;
+  try {
+    school = await School.findOne({ email: req.body.email });
+  } catch (error) {
+    console.log("errored when retrieving - " + error);
+    return res.status(400).json({
+      error: true,
+      message: "Error getting school from database - " + error,
+    });
+  } //finally
+  return res.status(200).json({
+    result: { school: school },
+    message: "Retrieved school successfully",
     success: true,
   });
 };
