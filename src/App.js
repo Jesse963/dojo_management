@@ -9,10 +9,26 @@ class App extends Component {
     students: [],
   };
 
-  componentDidMount() {
+  componentDidMount = async () => {
     this.getSchool();
     this.fetchStudents();
-  }
+    this.resetPassword();
+  };
+
+  resetPassword = async () => {
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get("token");
+    console.log(token);
+    const options = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ token: token }),
+    };
+    if (token) {
+      await fetch("/api/resetPassword", options);
+      this.setState({ display: "Password" });
+    }
+  };
 
   fetchStudents() {
     fetch("/api/getStudents")
@@ -38,18 +54,35 @@ class App extends Component {
       };
 
       const school = await fetch("/api/getSchool", options);
-      console.log("heres a fuckign log", school);
 
       let finalSchool = await school.json();
       finalSchool = finalSchool.result[0];
-      console.log("another dfucking log", finalSchool);
 
       return this.setState({ school: finalSchool });
     }
   };
 
+  generateContent = async () => {
+    switch (
+      this.state.display
+      //switch content based on display value, return JSX for the components
+      //in render(), return all base content (navbar etc) + call this function to determine content
+    ) {
+    }
+  };
+
   render() {
     if (document.cookie.length === 0) {
+      if (this.state.display === "Password") {
+        return (
+          <React.Fragment>
+            <NavBar />
+            <main className="container">
+              <LoginPanel display={"Password"} />
+            </main>
+          </React.Fragment>
+        );
+      }
       console.log("no cookie exists");
       return (
         <React.Fragment>

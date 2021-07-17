@@ -51,7 +51,11 @@ class Students extends Component {
         date: date,
       }),
     };
-    await fetch("/api/uploadAttendance", options);
+    const response = await fetch("/api/uploadAttendance", options);
+    const { success } = await response.json();
+    if (success) {
+      window.location.href = "/";
+    }
   };
 
   render() {

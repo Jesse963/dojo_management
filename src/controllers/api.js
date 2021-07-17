@@ -15,7 +15,11 @@ const {
   verifySchoolFromEmail,
 } = require("./databaseUploads");
 
-const { sendTestEmail } = require("./emailHandler");
+const {
+  sendTestEmail,
+  resetPassword,
+  updateUserPassword,
+} = require("./emailHandler");
 
 router.get("/getStudents", getStudents);
 router.post("/getSchool", getSchool);
@@ -32,6 +36,9 @@ router.post(
 router.post("/postNote", postNote);
 router.post("/getNotes", getNotes);
 router.post("/verifySchoolFromEmail", verifySchoolFromEmail);
+
 router.post("/sendTestEmail", sendTestEmail);
+router.post("/resetPassword", resetPassword);
+router.post("/updateUserPassword", updateUserPassword);
 
 module.exports = router;

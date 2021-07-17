@@ -40,7 +40,7 @@ let SchoolSchema = mongoose.Schema(
     },
     postcode: {
       type: Number,
-      required: true,
+      required: false,
     },
   },
   {

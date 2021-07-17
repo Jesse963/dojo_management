@@ -4,6 +4,7 @@ const Note = require("../models/notesSchema");
 const School = require("../models/schoolSchema");
 const Student = require("../models/studentSchema");
 const router = require("./api");
+const bcrypt = require("bcrypt");
 
 exports.submitStudent = async (req, res) => {
   try {
@@ -71,25 +72,25 @@ exports.uploadAttendance = async (req, res) => {
     });
   } //finally
   console.log("Successful Upload");
-  return res.status(200).json({
-    message: "Attendance Uploaded successfully",
+  res.status(200).json({
     success: true,
   });
 };
 
 exports.addNewSchool = async (req, res) => {
   const school_id = uuidv4();
+  const hashedPassword = await bcrypt.hash(req.body.password, 10);
+  console.log(hashedPassword);
   try {
     school = new School({
       name: req.body.school_name,
-      password: req.body.password,
+      password: hashedPassword,
       email: req.body.email,
       first_name: req.body.first_name,
       last_name: req.body.last_name,
       phone: req.body.phone,
       postcode: req.body.postcode,
       schoolID: school_id,
-      //need to add grades/classtypes eventually
     });
     await school.save();
   } catch (error) {
@@ -100,9 +101,7 @@ exports.addNewSchool = async (req, res) => {
     });
   } //finally
   console.log(`You have added a new school with id: ${school_id}`);
-  res.cookie(`school_id=${school_id}`);
-  res.location("/");
-  res.send(302);
+  return res.cookie(`school_id=${school_id}`).location("/").sendStatus(302);
 };
 
 exports.login = async (req, res) => {
@@ -110,7 +109,20 @@ exports.login = async (req, res) => {
   try {
     school = await School.findOne({
       email: req.body.email,
-      password: req.body.password,
+      // password: req.body.password,
+    });
+    console.log(school);
+
+    bcrypt.compare(req.body.password, school.password, (err, result) => {
+      if (result) {
+        console.log("HERE IS YOUR SCHOOL ID:" + school.schoolID);
+        res.cookie(`school_id=${school.schoolID}`);
+        res.location("/");
+        res.send(302);
+      } else {
+        console.log("Error, incorrect password?");
+        res.sendStatus(400);
+      }
     });
     if (!school) {
       res.status(400).json({
@@ -124,14 +136,6 @@ exports.login = async (req, res) => {
       message: `Error getting students from database: ${error}`,
     });
   }
-  console.log("HERE IS YOUR SCHOOL ID:" + school.schoolID);
-  res.cookie(`school_id=${school.schoolID}`);
-  res.location("/");
-  res.send(302);
-  // .json({
-  //   message: "School Found - " + school.name,
-  //   success: true,
-  // })
 };
 
 exports.getSchool = async (req, res) => {

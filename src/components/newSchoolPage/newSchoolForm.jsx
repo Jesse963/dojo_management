@@ -2,9 +2,6 @@ import React, { Component } from "react";
 
 class NewSchoolForm extends Component {
   state = {};
-  cancel(e) {
-    e.preventdefault();
-  }
   render() {
     return (
       <form
@@ -22,15 +19,17 @@ class NewSchoolForm extends Component {
               type="text"
               style={{ width: "100%" }}
               class="form-control"
+              required="true"
             />
           </p>
           <p>
             Email:
             <input
               name="email"
-              type="text"
+              type="email"
               style={{ width: "100%" }}
               class="form-control"
+              required="true"
             />
           </p>
           <p>
@@ -40,6 +39,7 @@ class NewSchoolForm extends Component {
               type="text"
               style={{ width: "100%" }}
               class="form-control"
+              required="true"
             />
           </p>
           <p>
@@ -49,19 +49,20 @@ class NewSchoolForm extends Component {
               type="text"
               style={{ width: "100%" }}
               class="form-control"
+              required="true"
             />
           </p>
           <p>
-            Phone:
+            Phone (Optional):
             <input
               name="phone"
-              type="text"
+              type="tel"
               style={{ width: "100%" }}
               class="form-control"
             />
           </p>
           <p>
-            Postcode:
+            Postcode (Optional):
             <input
               name="postcode"
               type="number"
@@ -76,6 +77,9 @@ class NewSchoolForm extends Component {
               type="password"
               style={{ width: "100%" }}
               class="form-control"
+              required="true"
+              minLength="8"
+              maxLength="30"
             />
           </p>
         </div>
@@ -88,10 +92,9 @@ class NewSchoolForm extends Component {
             Submit
           </button>
           <button
-            type="cancel"
             className="btn btn-danger btn-lg m-2"
             style={{ width: "20%" }}
-            onClick={this.cancel}
+            onClick={() => (window.location.href = "/")}
           >
             Cancel
           </button>

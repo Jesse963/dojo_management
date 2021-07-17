@@ -26,7 +26,13 @@ class NoteForm extends Component {
         <button className="btn btn-success" type="submit">
           Post Note
         </button>
-        <button className="btn btn-danger ml-3" type="cancel">
+        <button
+          className="btn btn-danger ml-3"
+          type="cancel"
+          onClick={(e) => {
+            e.preventDefault();
+          }}
+        >
           Cancel
         </button>
       </form>

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import Students from "../NewClassPage/students";
 import AdminPage from "../AdminPage/AdminPage";
+import NewStudentForm from "../AdminPage/NewSudentForm";
 import TrendsPage from "../TrendsPage/TrendsPage";
 import "../core.css";
 
@@ -25,12 +26,16 @@ class StartPage extends Component {
       document.querySelector(".container")
     );
   };
-  navigateToAdmin = () => {
+  navigateToNewStudent = () => {
     console.log("Navigated to Admin");
     ReactDOM.render(
-      <AdminPage students={this.props.students} school={this.props.school} />,
+      <NewStudentForm school_id={this.props.school.schoolID} />,
       document.querySelector(".container")
     );
+    // ReactDOM.render(
+    //   <AdminPage students={this.props.students} school={this.props.school} />,
+    //   document.querySelector(".container")
+    // );
   };
   logOut = () => {
     document.cookie = "school_id=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
@@ -46,28 +51,30 @@ class StartPage extends Component {
         style={{ marginTop: "15%" }}
       >
         <h1 className="m-3" style={{ textAlign: "center" }}>
-          Welcome to {this.props.school.name}, what would you like to do?
+          Welcome to {this.props.school.name}
+          <br />
+          What would you like to do?
         </h1>
         <button
           className="btn btn-primary btn-lg m-3"
           onClick={this.navigateToNewClass}
           style={{ width: "50%", alignSelf: "center" }}
         >
-          Start Class
+          Start a Class
         </button>
         <button
           className="btn btn-primary btn-lg m-3"
           onClick={this.navigateToTrends}
           style={{ width: "50%", alignSelf: "center" }}
         >
-          Trends
+          View Trends
         </button>
         <button
           className="btn btn-primary btn-lg m-3"
-          onClick={this.navigateToAdmin}
+          onClick={this.navigateToNewStudent}
           style={{ width: "50%", alignSelf: "center" }}
         >
-          Admin
+          Add New Student
         </button>
         <button
           className="btn btn-danger btn-lg m-3"
