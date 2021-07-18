@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ClassInformation from "../TrendsPage/classInfoComponent";
 
 class StudentInfo extends Component {
   state = {};
@@ -20,7 +21,7 @@ class StudentInfo extends Component {
         >
           {this.props.student.name}
         </h1>
-        <div
+        {/* <div
           className="profile image"
           style={{
             minWidth: "15vw",
@@ -29,7 +30,7 @@ class StudentInfo extends Component {
           }}
         >
           student profile image
-        </div>
+        </div> */}
 
         <ul
           className=""
@@ -38,14 +39,21 @@ class StudentInfo extends Component {
             listStyle: "none",
             margin: "0",
             padding: "0",
-            height: "30vh",
           }}
         >
-          <li>{this.props.student.name}</li>
           <li>{this.props.student.dob}</li>
           <li>{this.props.student.phone}</li>
           <li>{this.props.student.grade}</li>
         </ul>
+        <h3>Attended Classes</h3>
+        <div
+          className="student attendance mt-3"
+          style={{ maxHeight: "50vh", overflow: "auto" }}
+        >
+          {this.props.classes.map((Class) => {
+            return <ClassInformation class={Class} acceptClick={false} />;
+          })}
+        </div>
         <div
           className="control panel"
           style={{ width: "100%", textAlign: "center" }}

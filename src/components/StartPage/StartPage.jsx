@@ -48,7 +48,7 @@ class StartPage extends Component {
     return (
       <div
         className="start page container shadow-lg p-3 mb-5 bg-white rounded"
-        style={{ marginTop: "15%" }}
+        // style={{ marginTop: "15%" }}
       >
         <h1 className="m-3" style={{ textAlign: "center" }}>
           Welcome to {this.props.school.name}

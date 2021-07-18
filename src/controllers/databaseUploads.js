@@ -217,25 +217,27 @@ exports.getFullAttendance = async (req, res) => {
 exports.calculateFullAttendancePercentages = async (req, res) => {
   console.log("school ID: ", req.body.students[0].school);
   let attendancePercentages = {};
-
+  let attendances;
   try {
     //Collect total number of classes for the particular school
     const schoolCount = await this.getFullAttendance({
       body: { school: req.body.students[0].school, fromServer: true },
     });
     const totalClasses = schoolCount.length;
-
+    console.log("total classed: ", totalClasses);
     //Collect attendance information for each individual student - student/total = % of classes attended
     await req.body.students.forEach(async (student, i) => {
-      const attendances = await this.getStudentAttendance({
+      attendances = await this.getStudentAttendance({
         body: { school: student.school, name: student.name, fromServer: true },
       });
+      console.log("attendances: ", attendances);
       attendancePercentages[student.name] =
         (100 * attendances.length) / totalClasses;
 
       if (i == req.body.students.length - 1) {
         return res.status(200).json({
           result: attendancePercentages,
+          classes: attendances,
           message: "Is this the one?",
           success: true,
         });

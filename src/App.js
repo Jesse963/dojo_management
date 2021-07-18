@@ -87,7 +87,7 @@ class App extends Component {
       return (
         <React.Fragment>
           <NavBar />
-          <main className="container">
+          <main className="login container">
             <LoginPanel />
           </main>
         </React.Fragment>

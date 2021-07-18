@@ -17,6 +17,7 @@ class StudentDetails extends Component {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ school: school_id, name: full_name }),
     };
+    //make API calls
     const studentResponse = await fetch("/api/getStudentAttendance", options);
     const studentAttendance = await studentResponse.json();
     const fullResponse = await fetch("/api/getFullAttendance", options);
@@ -26,7 +27,6 @@ class StudentDetails extends Component {
     fullAttendance.result.forEach((lesson) => {
       totalAttendance += lesson.attendees.length;
     });
-
     //Calculate average attendace per student
     const averageAttendancePerStudent =
       totalAttendance / this.props.totalStudents;
@@ -34,16 +34,8 @@ class StudentDetails extends Component {
     this.setState({
       studentAttendance: studentAttendance.result.length,
       averageAttendancePerStudent: averageAttendancePerStudent,
+      attendedClasses: fullAttendance.result,
     });
-    console.log(fullAttendance.result.length);
-
-    console.log(
-      this.props.full_name +
-        " has attended " +
-        studentAttendance.result.length +
-        " classes. The average attendance in this period is: " +
-        averageAttendancePerStudent
-    );
   };
 
   componentDidMount() {
@@ -57,9 +49,12 @@ class StudentDetails extends Component {
     return (
       <div
         className="page container shadow-lg p-3 mb-5 bg-white rounded"
-        style={{ display: "flex", flexDirection: "row" }}
+        style={{ display: "flex", flexDirection: "row", marginTop: "10%" }}
       >
-        <StudentInfo student={this.props.student} />
+        <StudentInfo
+          student={this.props.student}
+          classes={this.state.attendedClasses}
+        />
         <StudentPerformance
           student={this.props.student}
           studentAttendance={this.state.studentAttendance}

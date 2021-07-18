@@ -34,7 +34,7 @@ class StudentPerformance extends Component {
       return null;
     }
     return (
-      <div className="right panel ml-5" style={{ textAlign: "center" }}>
+      <div className="right panel ml-4" style={{ textAlign: "center" }}>
         <h1>Attendance</h1>
         <div
           className="attendance graph"
@@ -54,7 +54,7 @@ class StudentPerformance extends Component {
           style={{
             border: "1px solid black",
             height: "30vh",
-            maxWidth: "45vw",
+            // maxWidth: "40vw",
             width: "35vw",
           }}
         >

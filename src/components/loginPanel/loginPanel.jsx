@@ -31,7 +31,7 @@ class LoginPanel extends Component {
               paddingRight: "5%",
             }}
           >
-            <div>
+            <div style={{ textAlign: "left", margin: "5%" }}>
               <h1 style={{ textAlign: "center" }}>Login</h1>
               <p>
                 Email:
@@ -57,28 +57,28 @@ class LoginPanel extends Component {
                   Forgot your password?
                 </a>
               </p>
-            </div>
-            <div
-              style={{
-                textAlign: "center",
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
-              <button
-                type="submit"
-                className="btn btn-success mt-3"
-                onClick={this.login}
+              <div
+                style={{
+                  textAlign: "center",
+                  display: "flex",
+                  flexDirection: "column",
+                }}
               >
-                Submit
-              </button>
-              <button
-                type="cancel"
-                className="btn btn-secondary mt-3"
-                onClick={this.createAccount}
-              >
-                Create Account
-              </button>
+                <button
+                  type="submit"
+                  className="btn btn-success mt-3"
+                  onClick={this.login}
+                >
+                  Submit
+                </button>
+                <button
+                  type="cancel"
+                  className="btn btn-secondary mt-3"
+                  onClick={this.createAccount}
+                >
+                  Create Account
+                </button>
+              </div>
             </div>
           </form>
         );

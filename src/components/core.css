@@ -1,19 +1,48 @@
+.container {
+  max-width: none;
+}
+
 .page.container {
-  margin-top: 5%;
+  margin-top: 15%;
   padding: 15px;
   border: 2px solid black;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 100%;
+  width: 55vw;
+  text-align: center;
 }
 
 #root {
   background: url("backgroundImage.jpg");
   min-height: 100vh;
+  align-items: center;
 }
 
 .hyperlink {
   color: blue !important;
   cursor: pointer;
+}
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+  padding-left: 5px;
+  border-radius: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

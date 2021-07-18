@@ -1,18 +1,9 @@
 import React, { Component } from "react";
 
 class ClassInformation extends Component {
-  state = {};
+  state = { acceptClick: true };
 
-  clickHandler() {
-    //     console.log(this.props.student.name);
-    //     reactDom.render(
-    //       <StudentDetails
-    //         student={this.props.student}
-    //         totalStudents={this.props.totalStudents}
-    //       />,
-    //       document.querySelector(".container")
-    //     );
-  }
+  clickHandler() {}
 
   render() {
     const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -36,7 +27,11 @@ class ClassInformation extends Component {
           cursor: "pointer",
           alignItems: "center",
         }}
-        onClick={() => this.props.clickHandler(this.props.id)}
+        onClick={() => {
+          if (this.state.acceptClick) {
+            this.props.clickHandler(this.props.id);
+          }
+        }}
       >
         <h5 style={{ maxWidth: "80%", width: "80%" }}>{date}</h5>
         <h5>{this.props.class.attendees.length}</h5>

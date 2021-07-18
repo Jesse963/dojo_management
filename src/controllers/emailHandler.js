@@ -36,10 +36,6 @@ exports.sendTestEmail = async (req, res) => {
   if (school === null) {
     console.log("NO SCHOOL FOUND");
   } else {
-    //READ EMAIL ADDRESS FROM RETURNED SCHOOL
-    //VERIFY VALIDITY OF EMAIL ADDRESS
-    //SEND EMAIL TO ADDRESS WITH LINK
-    // "/API/RETREIVE/HASH(SCHOOL_ID + SECRET_KEY)"
     const email = school.email;
     const tokenData = {
       school_id: school.schoolID,

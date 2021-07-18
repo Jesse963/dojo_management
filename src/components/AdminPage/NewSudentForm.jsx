@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "../core.css";
 
 class NewStudentForm extends Component {
   state = {};
@@ -9,9 +10,12 @@ class NewStudentForm extends Component {
         action={"/api/submit_student?school_id=" + this.props.school_id}
         className="shadow-lg p-3 mb-5 bg-white rounded page container"
         id="newStudnetForm"
+        style={{ textAlign: "left" }}
       >
-        <div style={{ paddingLeft: "5%", paddingRight: "5%" }}>
-          <h1 style={{ textAlign: "center" }}>Enter New Student Details</h1>
+        <h1 style={{ textAlign: "center" }}>Enter New Student Details</h1>
+        <div
+          style={{ paddingLeft: "5%", paddingRight: "5%", overflow: "auto" }}
+        >
           <p>
             First Name:
             <input

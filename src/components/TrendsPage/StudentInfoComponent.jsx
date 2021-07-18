@@ -52,5 +52,4 @@ class StudentTrend extends Component {
     );
   }
 }
-
 export default StudentTrend;

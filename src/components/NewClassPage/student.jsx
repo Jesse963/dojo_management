@@ -11,7 +11,7 @@ class Student extends Component {
   };
 
   checkStyle = () => {
-    let classes = "btn m-2 ";
+    let classes = "btn mt-2 ";
     classes += this.state.selected ? "btn-success" : "btn-outline-dark";
     return classes;
   };
@@ -22,7 +22,7 @@ class Student extends Component {
         <button
           onClick={this.handleClick}
           className={this.checkStyle()}
-          style={{ minWidth: "50%" }}
+          style={{ width: "100%" }}
         >
           {this.props.name}
         </button>

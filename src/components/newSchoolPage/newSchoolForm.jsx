@@ -9,8 +9,11 @@ class NewSchoolForm extends Component {
         action="/api/addNewSchool"
         className="shadow-lg p-3 mb-5 bg-white rounded page container"
         id="newSchoolForm"
+        style={{ marginTop: "10%" }}
       >
-        <div style={{ paddingLeft: "5%", paddingRight: "5%" }}>
+        <div
+          style={{ paddingLeft: "5%", paddingRight: "5%", textAlign: "left" }}
+        >
           <h1 style={{ textAlign: "center" }}>Welcome</h1>
           <p>
             Name of School:

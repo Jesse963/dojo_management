@@ -17,10 +17,16 @@ class NoteForm extends Component {
         <textarea
           name="content"
           id="noteContent"
-          style={{ height: "70%" }}
+          style={{
+            height: "90%",
+            width: "100%",
+            border: "none",
+            overflow: "auto",
+          }}
           wrap="hard"
-          rows="8"
+          rows="9"
           columns="2"
+          placeholder="Enter a note here"
         />
         <p></p>
         <button className="btn btn-success" type="submit">
