@@ -1,5 +1,5 @@
 {
-  "homepage": "http://Jesse963.github.io/dojo_management",
+  "homepage": "https://Jesse963.github.io/dojo_management",
   "proxy": "http://localhost:8080/",
   "name": "dojo_management",
   "version": "0.1.0",
@@ -29,8 +29,8 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "predeploy":"npm run build",
-    "deploy":"gh-pages -d build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "npm run start:dev",
     "start:dev": "concurrently \"npm run server\" \"npm run client\"",
     "server": "nodemon src/server.js",
@@ -56,5 +56,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^3.2.3"
   }
 }
