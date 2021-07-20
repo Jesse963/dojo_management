@@ -26,6 +26,7 @@ class ClassInformation extends Component {
           borderBottom: "1px dashed black",
           cursor: "pointer",
           alignItems: "center",
+          textAlign: "left",
         }}
         onClick={() => {
           if (this.state.acceptClick) {

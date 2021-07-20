@@ -9,7 +9,7 @@ class NewStudentForm extends Component {
         method="POST"
         action={"/api/submit_student?school_id=" + this.props.school_id}
         className="shadow-lg p-3 mb-5 bg-white rounded page container"
-        id="newStudnetForm"
+        id="newStudentForm"
         style={{ textAlign: "left" }}
       >
         <h1 style={{ textAlign: "center" }}>Enter New Student Details</h1>
@@ -23,6 +23,7 @@ class NewStudentForm extends Component {
               type="text"
               style={{ width: "100%" }}
               class="form-control"
+              required
             />
           </p>
           <p>
@@ -32,6 +33,7 @@ class NewStudentForm extends Component {
               type="text"
               style={{ width: "100%" }}
               class="form-control"
+              required
             />
           </p>
           <p>
@@ -41,6 +43,7 @@ class NewStudentForm extends Component {
               type="text"
               style={{ width: "100%" }}
               class="form-control"
+              required
             />
           </p>
           <p>
@@ -50,6 +53,7 @@ class NewStudentForm extends Component {
               type="text"
               style={{ width: "100%" }}
               class="form-control"
+              required
             />
           </p>
           <p>
@@ -59,15 +63,17 @@ class NewStudentForm extends Component {
               type="text"
               style={{ width: "100%" }}
               class="form-control"
+              required
             />
           </p>
           <p>
             Email:
             <input
               name="email"
-              type="text"
+              type="email"
               style={{ width: "100%" }}
               class="form-control"
+              required
             />
           </p>
         </div>

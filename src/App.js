@@ -42,11 +42,14 @@ class App extends Component {
   getSchool = async () => {
     console.log("getting school");
     let school_id;
-    if (document.cookie.length == 0) {
+    if (
+      document.cookie.length == 0 ||
+      document.cookie.split("school_id=")[1] === "failed_login"
+    ) {
       console.log("cookie length = 0");
       return;
     } else {
-      school_id = document.cookie.split("school_id=")[1].split("=")[0];
+      school_id = document.cookie.split("school_id=")[1];
       const options = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -72,7 +75,10 @@ class App extends Component {
   };
 
   render() {
-    if (document.cookie.length === 0) {
+    if (
+      document.cookie.length === 0 ||
+      document.cookie.split("school_id=")[1] === "failed_login"
+    ) {
       if (this.state.display === "Password") {
         return (
           <React.Fragment>

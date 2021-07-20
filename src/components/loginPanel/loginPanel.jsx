@@ -6,6 +6,18 @@ import NewSchoolForm from "../newSchoolPage/newSchoolForm";
 class LoginPanel extends Component {
   state = { display: "Login" };
 
+  componentDidMount() {
+    if (document.cookie.split("school_id=")[1] === "failed_login") {
+      this.setState({ success: "Username or password incorrect" });
+    } else {
+      this.setState({ success: "" });
+    }
+  }
+
+  login = async (req, res) => {
+    console.log("testing double button function");
+  };
+
   createAccount(e) {
     e.preventDefault();
     reactDom.render(<NewSchoolForm />, document.querySelector(".container"));
@@ -23,7 +35,7 @@ class LoginPanel extends Component {
             method="POST"
             action="/api/login"
             className="shadow-lg p-3 mb-5 bg-white rounded page container"
-            id="newStudnetForm"
+            id="loginForm"
             style={{
               marginTop: "20%",
               width: "30%",
@@ -40,6 +52,7 @@ class LoginPanel extends Component {
                   type="text"
                   style={{ width: "100%" }}
                   class="form-control"
+                  required
                 />
               </p>
               <p>
@@ -49,6 +62,7 @@ class LoginPanel extends Component {
                   type="password"
                   style={{ width: "100%" }}
                   class="form-control"
+                  required
                 />
                 <a
                   class="hyperlink"
@@ -57,6 +71,7 @@ class LoginPanel extends Component {
                   Forgot your password?
                 </a>
               </p>
+              <a style={{ color: "red" }}>{this.state.success}</a>
               <div
                 style={{
                   textAlign: "center",
@@ -67,7 +82,7 @@ class LoginPanel extends Component {
                 <button
                   type="submit"
                   className="btn btn-success mt-3"
-                  onClick={this.login}
+                  onClick={() => this.login()}
                 >
                   Submit
                 </button>
@@ -97,7 +112,7 @@ class LoginPanel extends Component {
               paddingRight: "5%",
             }}
           >
-            <div>
+            <div style={{ textAlign: "left" }}>
               <h1 style={{ textAlign: "center" }}>Reset Password</h1>
               <p>Enter your email below to receive a password reset email</p>
               <p>
@@ -142,7 +157,7 @@ class LoginPanel extends Component {
             method="POST"
             action={`/api/updateUserPassword?token=${token}`}
             className="shadow-lg p-3 mb-5 bg-white rounded page container"
-            id="newStudnetForm"
+            id="newStudentForm"
             style={{
               marginTop: "20%",
               width: "30%",

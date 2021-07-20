@@ -43,6 +43,7 @@ class StudentTrend extends Component {
           borderBottom: "1px dashed black",
           cursor: "pointer",
           alignItems: "center",
+          textAlign: "left",
         }}
         onClick={() => this.clickHandler()}
       >

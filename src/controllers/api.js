@@ -13,6 +13,7 @@ const {
   postNote,
   getNotes,
   verifySchoolFromEmail,
+  test,
 } = require("./databaseUploads");
 
 const {
@@ -40,5 +41,6 @@ router.post("/verifySchoolFromEmail", verifySchoolFromEmail);
 router.post("/sendTestEmail", sendTestEmail);
 router.post("/resetPassword", resetPassword);
 router.post("/updateUserPassword", updateUserPassword);
+router.get("/test", test);
 
 module.exports = router;

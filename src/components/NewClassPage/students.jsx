@@ -13,7 +13,7 @@ class Students extends Component {
   studentSearchOnChange = (event) => {
     this.setState({
       students: this.props.students.filter((student) =>
-        student.name.toLowerCase().includes(event.target.value)
+        student.name.toLowerCase().includes(event.target.value.toLowerCase())
       ),
     });
   };
