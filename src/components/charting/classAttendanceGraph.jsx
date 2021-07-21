@@ -2,7 +2,17 @@ import React, { Component } from "react";
 import { Bar } from "react-chartjs-2";
 
 class ClassAttendanceGraph extends Component {
-  componentDidMount() {}
+  componentDidMount() {
+    // this.setState({
+    //   datasets: [
+    //     {
+    //       backgroundColor: "#007bff",
+    //       borderColor: "rgba(0,0,0,1)",
+    //       // data: this.props.counts,
+    //     },
+    //   ],
+    // });
+  }
 
   state = {
     datasets: [
@@ -17,18 +27,35 @@ class ClassAttendanceGraph extends Component {
 
   render() {
     //Nicely format dates before passing them to state for graphing
-    if (this.state.labels.length === 0) {
-      let formattedDates = [];
-      this.props.dates.forEach((date) => {
-        date =
-          date.getDate() +
+    let counts = [];
+    let formattedDates = [];
+    if (this.state.labels.length !== this.props.filteredData.length) {
+      this.props.filteredData.forEach((Class) => {
+        //Format date into dd/mm/yy
+        const date =
+          Class.date.getDate() +
           "/" +
-          (date.getMonth() + 1) +
+          (Class.date.getMonth() + 1) +
           "/" +
-          date.getFullYear();
+          Class.date.getFullYear();
         formattedDates.push(date);
+
+        this.props.filteredData.forEach((Class) => {
+          counts.push(Class.count);
+        });
       });
-      this.setState({ labels: formattedDates });
+      //store counts from each class in an array for use in the graph
+
+      this.setState({
+        labels: formattedDates,
+        datasets: [
+          {
+            backgroundColor: "#007bff",
+            borderColor: "rgba(0,0,0,1)",
+            data: counts,
+          },
+        ],
+      });
     }
 
     return (

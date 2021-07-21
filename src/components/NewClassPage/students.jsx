@@ -1,13 +1,13 @@
 import React, { Component, useState } from "react";
 import Student from "./student.jsx";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import { DatePickerComponent } from "@syncfusion/ej2-react-calendars";
 import "../core.css";
 
 class Students extends Component {
   state = {
     currentAttendance: [],
     students: this.props.students,
+    failureMessage: "",
   };
 
   studentSearchOnChange = (event) => {
@@ -18,15 +18,11 @@ class Students extends Component {
     });
   };
 
-  renderDatePicker() {
+  renderDatePicker = () => {
+    // const [selectedDate, setSelectedDate] = useState(null);
     // const [startDate, setStartDate] = useState(new Date());
-    return (
-      <DatePicker
-        selected={new Date()}
-        // onChange={(date) => this.setState({ StartDate: date })}
-      />
-    );
-  }
+    return <DatePickerComponent />;
+  };
 
   // add student to attending students array
   addStudentToAttending = (student, selected) => {
@@ -41,7 +37,11 @@ class Students extends Component {
   };
 
   submitAttendance = async (date) => {
-    console.log(this.state.currentAttendance);
+    if (this.state.currentAttendance.length === 0) {
+      console.log("Select at least one student");
+      this.setState({ failureMessage: "Please select at least 1 student" });
+      return;
+    }
     const options = {
       method: "POST",
       headers: {
@@ -60,6 +60,12 @@ class Students extends Component {
   };
 
   render() {
+    if (
+      this.state.currentAttendance.length > 0 &&
+      this.state.failureMessage !== ""
+    ) {
+      this.setState({ failureMessage: "" });
+    }
     return (
       <div className="attendance selection page container shadow-lg p-3 mb-5 bg-white rounded">
         <h1 className="m-3 mb-4">Select Attending Students</h1>
@@ -119,17 +125,37 @@ class Students extends Component {
               <h2 className="m-3">
                 {this.state.currentAttendance.length} students selected
               </h2>
-
-              <p>{this.renderDatePicker()}</p>
+              <div style={{ paddingLeft: "33%", paddingRight: "33%" }}>
+                <DatePickerComponent
+                  id="datepicker"
+                  value={new Date()}
+                  format="dd/MM/yy"
+                />
+              </div>
               <div>
+                <p style={{ color: "red " }}>{this.state.failureMessage}</p>
                 <button
-                  onClick={() => this.submitAttendance(new Date())}
+                  onClick={() => {
+                    //convert selected date back into trash US date
+                    const dateElements = document
+                      .getElementById("datepicker")
+                      .value.split("/");
+                    const reorderedDate =
+                      dateElements[1] +
+                      "/" +
+                      dateElements[0] +
+                      "/" +
+                      dateElements[2];
+                    console.log(dateElements);
+                    console.log(reorderedDate);
+                    this.submitAttendance(new Date(reorderedDate));
+                  }}
                   className="btn btn-primary btn-lg m-3"
                 >
                   Submit Class
                 </button>
                 <button
-                  className="btn btn-primary btn-lg m-2"
+                  className="btn btn-secondary btn-lg m-2"
                   onClick={() => (window.location.href = "/")}
                 >
                   Home

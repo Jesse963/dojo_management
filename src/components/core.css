@@ -1,3 +1,4 @@
+@import url("https://cdn.syncfusion.com/ej2/material.css");
 .container {
   max-width: none;
 }
@@ -45,4 +46,8 @@
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+.button-half {
+  min-width: 45% !important;
 }

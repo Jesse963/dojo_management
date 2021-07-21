@@ -62,7 +62,7 @@ class StudentSelection extends Component {
           >
             <button className="btn btn-primary btn-lg m-2">Edit</button>
             <button
-              className="btn btn-primary btn-lg m-2"
+              className="btn btn-secondary btn-lg m-2"
               onClick={() => (window.location.href = "/")}
             >
               Home

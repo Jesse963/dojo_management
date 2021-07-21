@@ -6,7 +6,12 @@ class StudentsOverview extends Component {
   state = { students: this.props.students };
 
   render() {
-    //prevent render attempt until full attendance is retrieved - edit to return empty loading page instead of nothing
+    //prevent render attempt until full attendance is retrieved - edit to return skeleton loading page instead of nothing
+    this.props.fullAttendanceArray.map((student) => {
+      if (student === undefined) {
+        return null;
+      }
+    });
     if (this.props.fullAttendanceArray === undefined) {
       return null;
     } else {
@@ -23,13 +28,13 @@ class StudentsOverview extends Component {
                   paddingRight: "10px",
                 }}
               >
-                {this.props.students.map((student, i) => {
+                {this.props.fullAttendanceArray.map((student, i) => {
                   return (
                     <StudentTrend
                       student={student}
-                      attendancePercentage={
-                        this.props.fullAttendanceArray[student.name]
-                      }
+                      fullStudentDetails={this.state.students.find(
+                        (search) => search.name === student.name
+                      )}
                       totalStudents={this.props.students.length}
                       key={i}
                     />

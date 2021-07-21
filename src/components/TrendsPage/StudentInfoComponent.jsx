@@ -11,7 +11,7 @@ class StudentTrend extends Component {
     if (this.props.displayAttendance !== false) {
       reactDom.render(
         <StudentDetails
-          student={this.props.student}
+          student={this.props.fullStudentDetails}
           totalStudents={this.props.totalStudents}
         />,
         document.querySelector(".container")
@@ -22,7 +22,9 @@ class StudentTrend extends Component {
   checkDisplay() {
     if (this.props.displayAttendance !== false) {
       return (
-        <h5>{Math.round(100 * this.props.attendancePercentage) / 100}%</h5>
+        <h5>
+          {Math.round(100 * this.props.student.attendancePercentage) / 100}%
+        </h5>
       );
     }
   }

@@ -55,12 +55,12 @@ exports.getStudents = async (req, res) => {
 
 exports.uploadAttendance = async (req, res) => {
   console.log("entered upload attendance");
-  console.log(req.body);
+  console.log(new Date(req.body.date));
   const school_id = req.headers.cookie.split("school_id=")[1];
   try {
     const attendance = new Attendance({
       school: school_id,
-      date: req.body.date,
+      date: new Date(req.body.date),
       classType: "Standard",
       attendees: req.body.students,
     });
@@ -231,7 +231,7 @@ exports.getFullAttendance = async (req, res) => {
 
 exports.calculateFullAttendancePercentages = async (req, res) => {
   console.log("school ID: ", req.body.students[0].school);
-  let attendancePercentages = {};
+  let attendancePercentages = [];
   let attendances;
   try {
     //Collect total number of classes for the particular school
@@ -246,8 +246,11 @@ exports.calculateFullAttendancePercentages = async (req, res) => {
         body: { school: student.school, name: student.name, fromServer: true },
       });
       console.log("attendances: ", attendances);
-      attendancePercentages[student.name] =
-        (100 * attendances.length) / totalClasses;
+      const studentPercentage = (100 * attendances.length) / totalClasses;
+      attendancePercentages.push({
+        name: student.name,
+        attendancePercentage: studentPercentage,
+      });
 
       if (i == req.body.students.length - 1) {
         return res.status(200).json({

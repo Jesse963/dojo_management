@@ -51,7 +51,7 @@ class StartPage extends Component {
         // style={{ marginTop: "15%" }}
       >
         <h1 className="m-3" style={{ textAlign: "center" }}>
-          Welcome to {this.props.school.name}
+          Hello {this.props.school.first_name},
           <br />
           What would you like to do?
         </h1>
