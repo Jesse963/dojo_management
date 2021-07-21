@@ -1,6 +1,6 @@
 {
   "homepage": "https://Jesse963.github.io/dojo_management",
-  "proxy": "http://localhost:8080/",
+  
   "name": "dojo_management",
   "version": "0.1.0",
   "private": true,
