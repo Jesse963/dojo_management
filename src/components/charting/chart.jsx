@@ -14,7 +14,7 @@ class Chart extends React.Component {
         data: [this.props.student, this.props.average],
       },
     ],
-    labels: [this.props.name, "Average"],
+    labels: [this.props.first_name, "Average"],
   };
 
   render() {

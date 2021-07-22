@@ -8,7 +8,7 @@ class StudentDetails extends Component {
   getStudentAttendance = async () => {
     //Set parameters
     const school_id = this.props.student.school;
-    const full_name = this.props.student.name;
+    const full_name = `${this.props.student.first_name} ${this.props.student.last_name}`;
     let totalAttendance = 0;
 
     //Set options and make calls to api

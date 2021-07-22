@@ -43,7 +43,8 @@ class StudentPerformance extends Component {
           }}
         >
           <Chart
-            name={this.props.student.name}
+            first_name={this.props.student.first_name}
+            last_name={this.props.student.last_name}
             student={this.props.studentAttendance}
             average={this.props.averageAttendancePerStudent}
           />

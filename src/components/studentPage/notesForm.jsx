@@ -10,7 +10,7 @@ class NoteForm extends Component {
           "/api/postNote?school_id=" +
           this.props.student.school +
           "&student_id=" +
-          this.props.student.name
+          this.props.student._id
         }
         style={{ margin: "2.5%" }}
       >

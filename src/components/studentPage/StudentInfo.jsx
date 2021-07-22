@@ -1,7 +1,17 @@
 import React, { Component } from "react";
 import ClassInformation from "../TrendsPage/classInfoComponent";
+import EditStudentForm from "./editStudentForm";
+import ReactDOM from "react-dom";
 
 class StudentInfo extends Component {
+  editButtonHandler() {
+    console.log("Edit button: ", this.props.student);
+    ReactDOM.render(
+      <EditStudentForm student={this.props.student} />,
+      document.querySelector(".container")
+    );
+  }
+
   state = {};
   render() {
     return (
@@ -19,7 +29,7 @@ class StudentInfo extends Component {
             overflowY: "hidden",
           }}
         >
-          {this.props.student.name}
+          {this.props.student.first_name} {this.props.student.last_name}
         </h1>
         {/* <div
           className="profile image"
@@ -58,7 +68,12 @@ class StudentInfo extends Component {
           className="control panel"
           style={{ width: "100%", textAlign: "center" }}
         >
-          <button className="btn btn-primary btn-lg m-2">Edit</button>
+          <button
+            className="btn btn-primary btn-lg m-2"
+            onClick={() => this.editButtonHandler()}
+          >
+            Edit
+          </button>
           <button
             className="btn btn-secondary btn-lg m-2"
             onClick={() => (window.location.href = "/")}

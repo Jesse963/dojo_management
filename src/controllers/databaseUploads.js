@@ -10,7 +10,8 @@ exports.submitStudent = async (req, res) => {
   try {
     const newStudent = req.body;
     const studentEntry = new Student({
-      name: newStudent.first_name + " " + newStudent.last_name,
+      first_name: newStudent.first_name,
+      last_name: newStudent.last_name,
       school: req.query.school_id,
       dob: newStudent.dob,
       grade: "White Belt",
@@ -36,7 +37,9 @@ exports.getStudents = async (req, res) => {
   }
   let students;
   try {
-    students = await Student.find({ school: school_id }).sort({ name: 1 });
+    students = await Student.find({ school: school_id }).sort({
+      first_name: 1,
+    });
   } catch (error) {
     return res.status(400).json({
       error: true,
@@ -175,14 +178,13 @@ exports.getStudentAttendance = async (req, res) => {
   console.log("Entered get attendance");
   let attendances;
   const school_id = req.body.school;
-  const fullName = req.body.name;
-
-  console.log(school_id, fullName);
+  // const fullName = req.body.name;
+  const student_id = req.body._id;
 
   try {
     attendances = await Attendance.find({
       school: school_id,
-      attendees: fullName,
+      _id: student_id,
     });
     console.log(attendances);
   } catch (error) {
@@ -243,12 +245,13 @@ exports.calculateFullAttendancePercentages = async (req, res) => {
     //Collect attendance information for each individual student - student/total = % of classes attended
     await req.body.students.forEach(async (student, i) => {
       attendances = await this.getStudentAttendance({
-        body: { school: student.school, name: student.name, fromServer: true },
+        body: { school: student.school, _id: student._id, fromServer: true },
       });
       console.log("attendances: ", attendances);
       const studentPercentage = (100 * attendances.length) / totalClasses;
       attendancePercentages.push({
-        name: student.name,
+        _id: student._id,
+        name: student.first_name + " " + student.last_name,
         attendancePercentage: studentPercentage,
       });
 
@@ -294,13 +297,14 @@ exports.postNote = async (req, res) => {
 exports.getNotes = async (req, res) => {
   console.log("Entered get notes");
   const school_id = req.body.student.school;
-  const fullName = req.body.student.name;
+  const student_id = req.body._id;
+  // const fullName = req.body.student.name;
   let notes;
   try {
     notes = await Note.find({
       school: school_id,
-      student: fullName,
-    });
+      _id: student_id,
+    }).sort({ date: -1 });
   } catch (error) {
     return res.status(400).json({
       error: true,
@@ -332,4 +336,22 @@ exports.verifySchoolFromEmail = async (req, res) => {
     message: "Retrieved school successfully",
     success: true,
   });
+};
+
+exports.editStudentDetails = async (req, res) => {
+  console.log("entered edit student details");
+  const student_id = req.query.student_id;
+  const query = { _id: student_id };
+  console.log("query for update: ", query);
+
+  try {
+    await Student.updateOne(query, req.body);
+  } catch (error) {
+    return res.status(400).json({
+      error: true,
+      message: `Failed to update user password - ${error}`,
+    });
+  }
+  res.location("/");
+  res.sendStatus(302);
 };

@@ -17,7 +17,7 @@ class StudentSelectionButton extends Component {
     return (
       <li>
         <button onClick={this.handleClick} className="btn m-2 btn-outline-dark">
-          {this.props.student.name}
+          {this.props.student.first_name} {this.props.student.last_name}
         </button>
       </li>
     );

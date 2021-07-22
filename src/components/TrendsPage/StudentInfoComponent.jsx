@@ -6,7 +6,6 @@ class StudentTrend extends Component {
   state = {};
 
   clickHandler() {
-    console.log(this.props.student.name);
     //prevent click through to student page from info -> classes -> attendees. aim to add later
     if (this.props.displayAttendance !== false) {
       reactDom.render(

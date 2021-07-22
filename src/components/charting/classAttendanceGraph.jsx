@@ -1,19 +1,7 @@
 import React, { Component } from "react";
-import { Bar } from "react-chartjs-2";
+import { Bar, Line } from "react-chartjs-2";
 
 class ClassAttendanceGraph extends Component {
-  componentDidMount() {
-    // this.setState({
-    //   datasets: [
-    //     {
-    //       backgroundColor: "#007bff",
-    //       borderColor: "rgba(0,0,0,1)",
-    //       // data: this.props.counts,
-    //     },
-    //   ],
-    // });
-  }
-
   state = {
     datasets: [
       {

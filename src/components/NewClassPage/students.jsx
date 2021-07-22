@@ -13,7 +13,9 @@ class Students extends Component {
   studentSearchOnChange = (event) => {
     this.setState({
       students: this.props.students.filter((student) =>
-        student.name.toLowerCase().includes(event.target.value.toLowerCase())
+        student.first_name
+          .toLowerCase()
+          .includes(event.target.value.toLowerCase())
       ),
     });
   };
@@ -106,8 +108,7 @@ class Students extends Component {
                 {this.state.students.map((student, i) => (
                   <Student
                     key={i}
-                    name={student.name}
-                    grade={student.grade}
+                    student={student}
                     addStudentToAttending={this.addStudentToAttending}
                   />
                 ))}

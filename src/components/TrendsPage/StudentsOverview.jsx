@@ -33,7 +33,7 @@ class StudentsOverview extends Component {
                     <StudentTrend
                       student={student}
                       fullStudentDetails={this.state.students.find(
-                        (search) => search.name === student.name
+                        (search) => search._id === student._id
                       )}
                       totalStudents={this.props.students.length}
                       key={i}

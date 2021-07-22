@@ -7,7 +7,10 @@ class Student extends Component {
     this.setState((prevState) => ({
       selected: !prevState.selected,
     }));
-    this.props.addStudentToAttending(this.props.name, this.state.selected);
+    this.props.addStudentToAttending(
+      this.props.student._id,
+      this.state.selected
+    );
   };
 
   checkStyle = () => {
@@ -24,7 +27,7 @@ class Student extends Component {
           className={this.checkStyle()}
           style={{ width: "100%" }}
         >
-          {this.props.name}
+          {this.props.student.first_name} {this.props.student.last_name}
         </button>
       </li>
     );
