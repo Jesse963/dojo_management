@@ -3,8 +3,6 @@ import React, { Component } from "react";
 class ClassInformation extends Component {
   state = { acceptClick: true };
 
-  clickHandler() {}
-
   render() {
     const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     let date = new Date(this.props.class.date);

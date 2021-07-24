@@ -6,28 +6,39 @@ import EditStudentForm from "./components/studentPage/editStudentForm";
 
 class App extends Component {
   state = {
+    renderInfo: true,
     school: {},
     students: [],
   };
 
   componentDidMount = async () => {
-    this.getSchool();
-    this.fetchStudents();
-    this.resetPassword();
+    if (
+      document.cookie.length === 0 ||
+      document.cookie.split("school_id=")[1] === "failed_login" ||
+      document.cookie.split("school_id=")[1] === "Unvalidated_Account"
+    ) {
+      this.setState({ renderInfo: false });
+    } else {
+      this.setState({ renderInfo: true });
+      this.getSchool();
+      this.fetchStudents();
+      this.resetPassword();
+    }
   };
 
   resetPassword = async () => {
-    const params = new URLSearchParams(window.location.search);
-    const token = params.get("token");
-    console.log(token);
-    const options = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ token: token }),
-    };
-    if (token) {
-      await fetch("/api/resetPassword", options);
-      this.setState({ display: "Password" });
+    if (window.location.href.includes("resetPassword")) {
+      const params = new URLSearchParams(window.location.search);
+      const token = params.get("token");
+      const options = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token: token }),
+      };
+      if (token) {
+        await fetch("/api/resetPassword", options);
+        this.setState({ display: "Password" });
+      }
     }
   };
 
@@ -42,26 +53,21 @@ class App extends Component {
 
   getSchool = async () => {
     console.log("getting school");
-    let school_id;
-    if (
-      document.cookie.length == 0 ||
-      document.cookie.split("school_id=")[1] === "failed_login"
-    ) {
-      console.log("cookie length = 0");
+    let jwt_token;
+    if (!this.state.renderInfo) {
       return;
     } else {
-      school_id = document.cookie.split("school_id=")[1];
+      jwt_token = document.cookie.split("school_id=")[1];
       const options = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ school_id: school_id }),
+        body: JSON.stringify({ school_id: jwt_token }),
       };
 
       const school = await fetch("/api/getSchool", options);
 
       let finalSchool = await school.json();
       finalSchool = finalSchool.result[0];
-
       return this.setState({ school: finalSchool });
     }
   };
@@ -76,10 +82,7 @@ class App extends Component {
   };
 
   render() {
-    if (
-      document.cookie.length === 0 ||
-      document.cookie.split("school_id=")[1] === "failed_login"
-    ) {
+    if (!this.state.renderInfo) {
       if (this.state.display === "Password") {
         return (
           <React.Fragment>

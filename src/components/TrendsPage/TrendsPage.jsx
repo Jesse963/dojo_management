@@ -14,12 +14,13 @@ class TrendsPage extends Component {
 
   componentDidMount = async () => {
     //set options for api calls
+    const school_id = document.cookie.split("school_id=")[1];
     const options = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         students: this.props.students,
-        school: this.props.school.schoolID,
+        school: school_id,
       }),
     };
 
@@ -171,7 +172,29 @@ class TrendsPage extends Component {
       this.state.dates === undefined ||
       this.state.fullAttendanceArray === undefined
     ) {
-      return null;
+      return (
+        <div
+          className="trends page container shadow-lg p-3 mb-5 bg-white rounded"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            marginTop: "10%",
+            height: "65vh",
+            alignItems: "center",
+          }}
+        >
+          <h1 className={"m-5"}>
+            An error occurred while retrieving your data.{" "}
+          </h1>
+          <button
+            style={{ width: "50%" }}
+            className="btn btn-primary btn-lg m-2"
+            onClick={() => (window.location.href = "/")}
+          >
+            Home
+          </button>
+        </div>
+      );
     } else {
       //calculate date to start graph from
       let filterDate = new Date();

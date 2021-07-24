@@ -21,6 +21,8 @@ const {
   sendTestEmail,
   resetPassword,
   updateUserPassword,
+  sendVerificationEmail,
+  verifyNewAccount,
 } = require("./emailHandler");
 
 router.get("/getStudents", getStudents);
@@ -44,5 +46,7 @@ router.post("/resetPassword", resetPassword);
 router.post("/updateUserPassword", updateUserPassword);
 router.get("/test", test);
 router.post("/editStudentDetails", editStudentDetails);
+router.post("/sendVerificationEmail", sendVerificationEmail);
+router.get("/verifyNewAccount", verifyNewAccount);
 
 module.exports = router;

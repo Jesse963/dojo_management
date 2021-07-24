@@ -10,7 +10,7 @@ class StudentTrend extends Component {
     if (this.props.displayAttendance !== false) {
       reactDom.render(
         <StudentDetails
-          student={this.props.fullStudentDetails}
+          student={this.props.student}
           totalStudents={this.props.totalStudents}
         />,
         document.querySelector(".container")
@@ -22,19 +22,13 @@ class StudentTrend extends Component {
     if (this.props.displayAttendance !== false) {
       return (
         <h5>
-          {Math.round(100 * this.props.student.attendancePercentage) / 100}%
+          {Math.round(100 * this.props.attendance.attendancePercentage) / 100}%
         </h5>
       );
     }
   }
 
   render() {
-    let studentName;
-    if (typeof this.props.student === "string") {
-      studentName = this.props.student;
-    } else {
-      studentName = this.props.student.name;
-    }
     return (
       <div
         className="student info"
@@ -48,7 +42,9 @@ class StudentTrend extends Component {
         }}
         onClick={() => this.clickHandler()}
       >
-        <h5 style={{ maxWidth: "80%", width: "80%" }}>{studentName}</h5>
+        <h5 style={{ maxWidth: "80%", width: "80%" }}>
+          {this.props.student.first_name} {this.props.student.last_name}
+        </h5>
         {this.checkDisplay()}
       </div>
     );

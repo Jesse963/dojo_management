@@ -7,7 +7,7 @@ class StudentDetails extends Component {
 
   getStudentAttendance = async () => {
     //Set parameters
-    const school_id = this.props.student.school;
+    const school_id = document.cookie.split("school_id=")[1];
     const full_name = `${this.props.student.first_name} ${this.props.student.last_name}`;
     let totalAttendance = 0;
 
@@ -15,8 +15,9 @@ class StudentDetails extends Component {
     const options = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ school: school_id, name: full_name }),
+      body: JSON.stringify({ school: school_id, _id: this.props.student._id }),
     };
+    console.log(options);
     //make API calls
     const studentResponse = await fetch("/api/getStudentAttendance", options);
     const studentAttendance = await studentResponse.json();

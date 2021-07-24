@@ -7,7 +7,7 @@ let NotesSchema = mongoose.Schema(
       required: true,
       default: "Admin",
     },
-    student: {
+    student_id: {
       type: String,
       required: true,
     },

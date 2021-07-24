@@ -60,8 +60,14 @@ class StudentInfo extends Component {
           className="student attendance mt-3"
           style={{ maxHeight: "50vh", overflow: "auto" }}
         >
-          {this.props.classes.map((Class) => {
-            return <ClassInformation class={Class} acceptClick={false} />;
+          {this.props.classes.map((Class, i) => {
+            return (
+              <ClassInformation
+                class={Class}
+                id={i}
+                clickHandler={() => console.log("nothing")}
+              />
+            );
           })}
         </div>
         <div
@@ -80,7 +86,6 @@ class StudentInfo extends Component {
           >
             Home
           </button>
-          <button className="btn btn-primary btn-lg m-2">Back</button>
         </div>
       </div>
     );

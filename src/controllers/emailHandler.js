@@ -41,7 +41,7 @@ exports.sendTestEmail = async (req, res) => {
       school_id: school.schoolID,
       updatedAt: school.updatedAt,
     };
-    const secret = process.env.RESET_PASS_SECRET;
+    const secret = process.env.JWT_TOKEN_SECRET;
     console.log(tokenData, "/", secret);
     const token = jwt.sign(tokenData, secret);
 
@@ -76,7 +76,7 @@ exports.resetPassword = async (req, res) => {
 exports.updateUserPassword = async (req, res) => {
   console.log("entered update user pass");
   const token = req.query.token;
-  const decodedToken = jwt.verify(token, process.env.RESET_PASS_SECRET);
+  const decodedToken = jwt.verify(token, process.env.JWT_TOKEN_SECRET);
   console.log("decoded token", decodedToken);
 
   const school = await School.findOne({ schoolID: decodedToken.school_id });
@@ -106,4 +106,54 @@ exports.updateUserPassword = async (req, res) => {
   }
   res.location("/");
   res.sendStatus(302);
+};
+
+exports.sendVerificationEmail = async (req, res) => {
+  //Create JWT for email verification
+  const payload = { school_id: "025b2680-58d4-4a10-a003-dbf1a733869d" };
+  const secret = process.env.JWT_TOKEN_SECRET;
+  const token = jwt.sign(payload, secret);
+
+  //set email options
+  const emailOptions = {
+    from: "jesse-jenkins@hotmail.com",
+    to: "jesse-jenkins@hotmail.com",
+    subject: "Password reset",
+    text: `Hello, this is an automated email to verify your account.\n\nClick the link below to verify and log in.\n\n${process.env.BASE_URL}/api/verifyNewAccount?token=${token}`,
+  };
+
+  //send email
+  transporter.sendMail(emailOptions, (err, info) => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+    console.log(info.response);
+  });
+
+  return res.json(token);
+  // .sendStatus(200);
+};
+
+//Handle verification email responses
+exports.verifyNewAccount = async (req, res) => {
+  console.log("Entered email verification");
+  const token = req.query.token;
+  let decodedToken;
+  let school_id;
+  try {
+    decodedToken = jwt.verify(token, process.env.JWT_TOKEN_SECRET);
+    school_id = decodedToken.school_id;
+    await School.updateOne({ schoolID: school_id }, { verified: true });
+  } catch (error) {
+    console.log(
+      "failed to update school or somethin gin the try im looking at"
+    );
+    return res.status(400).json({
+      error: true,
+      message: `Failed to verify new account - ${error}`,
+    });
+  }
+  console.log(`successfully verified account ${school_id} with token ${token}`);
+  return res.cookie("school_id", token).location("/").sendStatus(302);
 };

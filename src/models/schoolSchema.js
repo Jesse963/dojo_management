@@ -42,6 +42,10 @@ let SchoolSchema = mongoose.Schema(
       type: Number,
       required: false,
     },
+    verified: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: {

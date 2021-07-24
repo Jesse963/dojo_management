@@ -31,8 +31,8 @@ class StudentsOverview extends Component {
                 {this.props.fullAttendanceArray.map((student, i) => {
                   return (
                     <StudentTrend
-                      student={student}
-                      fullStudentDetails={this.state.students.find(
+                      attendance={student}
+                      student={this.state.students.find(
                         (search) => search._id === student._id
                       )}
                       totalStudents={this.props.students.length}
@@ -58,9 +58,10 @@ class StudentsOverview extends Component {
                   (student, i) => {
                     return (
                       <StudentTrend
-                        student={student}
+                        student={this.state.students.find(
+                          (search) => search._id === student
+                        )}
                         attendancePercentage={""}
-                        // totalStudents={this.props.students.length}
                         key={i}
                         displayAttendance={false}
                       />

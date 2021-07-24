@@ -7,15 +7,29 @@ class LoginPanel extends Component {
   state = { display: "Login" };
 
   componentDidMount() {
-    if (document.cookie.split("school_id=")[1] === "failed_login") {
-      this.setState({ success: "Username or password incorrect" });
-    } else {
-      this.setState({ success: "" });
+    const school_id = document.cookie.split("school_id=")[1];
+    switch (school_id) {
+      case "failed_login":
+        this.setState({ success: "Username or password incorrect" });
+        break;
+      case "Unvalidated_Account":
+        this.setState({ success: "Account has not been validated yet" });
+        break;
+      default:
+        this.setState({ success: "" });
+    }
+
+    //check if the url includes a newAccountVerification and send them to the route if so.
+    //Here instead of app.js as in theory an unverified account should only ever see the login page
+    console.log(window.location.href);
+    if (window.location.href.includes("verifyNewAccount")) {
+      this.verifyNewAccount();
     }
   }
-
-  login = async (req, res) => {
-    console.log("testing double button function");
+  verifyNewAccount = async () => {
+    const request = window.location.href.split("/")[4];
+    await fetch(`/api/${request}`);
+    window.location.href = "/";
   };
 
   createAccount(e) {
@@ -82,7 +96,7 @@ class LoginPanel extends Component {
                 <button
                   type="submit"
                   className="btn btn-success mt-3"
-                  onClick={() => this.login()}
+                  // onClick={() => this.login()}
                 >
                   Submit
                 </button>

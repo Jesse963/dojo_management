@@ -7,7 +7,10 @@ class NewStudentForm extends Component {
     return (
       <form
         method="POST"
-        action={"/api/submit_student?school_id=" + this.props.school_id}
+        action={
+          "/api/submit_student?school_id=" +
+          document.cookie.split("school_id=")[1]
+        } //THIS NEEDS TO BE CHANGES TO SEND JWT OF SCHOOL ID FROM COOKIE
         className="shadow-lg p-3 mb-5 bg-white rounded page container"
         id="newStudentForm"
         style={{ textAlign: "left" }}

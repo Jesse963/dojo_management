@@ -8,7 +8,7 @@ class NoteForm extends Component {
         method="POST"
         action={
           "/api/postNote?school_id=" +
-          this.props.student.school +
+          document.cookie.split("school_id=")[1] +
           "&student_id=" +
           this.props.student._id
         }
