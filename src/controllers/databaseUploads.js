@@ -21,10 +21,23 @@ exports.submitStudent = async (req, res) => {
   //accepts jwt containing school_id as query string and submits students to that school after decoding
   console.log("submitting students: ", req.body);
   console.log(req.query);
-  const school_id = jwt.verify(
+
+  const decoded_token = jwt.verify(
     req.query.school_id,
     process.env.JWT_TOKEN_SECRET
-  ).school_id;
+  );
+
+  const school_id = decoded_token.school_id;
+  const expiry = new Date(decoded_token.expiry) || "";
+
+  if (typeof expiry === "object" && expiry < new Date()) {
+    console.log("token has expired");
+    return res.json({
+      success: false,
+      message:
+        "Token has expired, contact your school admin to generate another",
+    });
+  }
 
   try {
     const newStudent = req.body;
@@ -149,7 +162,7 @@ exports.addNewSchool = async (req, res) => {
     }
     console.log(info.response);
   });
-  return res.location("/").sendStatus(200);
+  return res.location("/").sendStatus(302);
 };
 
 exports.login = async (req, res) => {
@@ -425,4 +438,20 @@ exports.editStudentDetails = async (req, res) => {
   }
   res.location("/");
   res.sendStatus(302);
+};
+
+exports.generateNewStudentLink = async (req, res) => {
+  const cookie_token = req.headers.cookie.split("school_id=")[1];
+  const school_id = jwt.verify(
+    cookie_token,
+    process.env.JWT_TOKEN_SECRET
+  ).school_id;
+  const expiry = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
+  const token = jwt.sign(
+    { school_id: school_id, expiry: expiry },
+    process.env.JWT_TOKEN_SECRET
+  );
+  const link = `${process.env.BASE_URL}/api/addStudentFromLink?token=${token}`;
+  console.log(link);
+  return res.json({ success: true, result: link });
 };

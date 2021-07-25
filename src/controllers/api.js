@@ -15,6 +15,7 @@ const {
   verifySchoolFromEmail,
   test,
   editStudentDetails,
+  generateNewStudentLink,
 } = require("./databaseUploads");
 
 const {
@@ -48,5 +49,5 @@ router.get("/test", test);
 router.post("/editStudentDetails", editStudentDetails);
 router.post("/sendVerificationEmail", sendVerificationEmail);
 router.get("/verifyNewAccount", verifyNewAccount);
-
+router.get("/generateNewStudentLink", generateNewStudentLink);
 module.exports = router;

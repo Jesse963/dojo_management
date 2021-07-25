@@ -1,12 +1,23 @@
 import React, { Component } from "react";
 import reactDom from "react-dom";
-import "../core.css";
+import NewStudentForm from "../AdminPage/NewSudentForm";
 import NewSchoolForm from "../newSchoolPage/newSchoolForm";
+import "../core.css";
 
 class LoginPanel extends Component {
   state = { display: "Login" };
 
   componentDidMount() {
+    //on login page, if url contains a link to add student, render the new student form
+    if (window.location.href.includes("addStudentFromLink")) {
+      const params = new URLSearchParams(window.location.search);
+      const token = params.get("token");
+      console.log(token);
+      reactDom.render(
+        <NewStudentForm token={token} fromLink={true} />,
+        document.querySelector(".container")
+      );
+    }
     const school_id = document.cookie.split("school_id=")[1];
     switch (school_id) {
       case "failed_login":

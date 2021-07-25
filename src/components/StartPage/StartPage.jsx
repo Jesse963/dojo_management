@@ -29,7 +29,7 @@ class StartPage extends Component {
   navigateToNewStudent = () => {
     console.log("Navigated to Admin");
     ReactDOM.render(
-      <NewStudentForm school_id={this.props.school.schoolID} />,
+      <NewStudentForm token={document.cookie.split("school_id=")[1]} />,
       document.querySelector(".container")
     );
     // ReactDOM.render(

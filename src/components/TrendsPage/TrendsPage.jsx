@@ -167,7 +167,6 @@ class TrendsPage extends Component {
 
   render() {
     const sortArrow = { "-1": "v", 1: "^" };
-    console.log(sortArrow[this.state.sortDirection]);
     if (
       this.state.dates === undefined ||
       this.state.fullAttendanceArray === undefined

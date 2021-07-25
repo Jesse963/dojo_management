@@ -45,7 +45,29 @@ class StudentDetails extends Component {
 
   render() {
     if (!this.state.studentAttendance) {
-      return null;
+      return (
+        <div
+          className="trends page container shadow-lg p-3 mb-5 bg-white rounded"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            marginTop: "10%",
+            height: "65vh",
+            alignItems: "center",
+          }}
+        >
+          <h1 className={"m-5"}>
+            No Trends to display for {this.props.student.first_name}.{" "}
+          </h1>
+          <button
+            style={{ width: "50%" }}
+            className="btn btn-primary btn-lg m-2"
+            onClick={() => (window.location.href = "/")}
+          >
+            Home
+          </button>
+        </div>
+      );
     }
     return (
       <div
