@@ -91,6 +91,7 @@ class NewSchoolForm extends Component {
             type="submit"
             className="btn btn-primary btn-lg m-2"
             style={{ width: "20%" }}
+            // onClick={(e) => this.handleSubmit(e)}
           >
             Submit
           </button>

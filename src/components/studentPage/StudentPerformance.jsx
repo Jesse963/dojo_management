@@ -63,8 +63,8 @@ class StudentPerformance extends Component {
             className="notes content m-2"
             style={{ height: "75%", overflowY: "auto" }}
           >
-            {this.state.notes.map((note) => (
-              <NoteComponent note={note} />
+            {this.state.notes.map((note, i) => (
+              <NoteComponent note={note} id={i} key={i} />
             ))}
           </div>
           <div className="control panel">

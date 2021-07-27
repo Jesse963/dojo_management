@@ -35,7 +35,7 @@ class StudentDetails extends Component {
     this.setState({
       studentAttendance: studentAttendance.result.length,
       averageAttendancePerStudent: averageAttendancePerStudent,
-      attendedClasses: fullAttendance.result,
+      attendedClasses: studentAttendance.result,
     });
   };
 

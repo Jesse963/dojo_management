@@ -118,6 +118,15 @@ exports.uploadAttendance = async (req, res) => {
 };
 
 exports.addNewSchool = async (req, res) => {
+  //check for existing school before creating a new one
+  const emailExists = await School.findOne({ email: req.body.email });
+  if (emailExists) {
+    console.log("email already exists");
+    return res
+      .status(400)
+      .json({ result: "An account already exists with this email address" });
+  }
+
   const school_id = uuidv4();
   const hashedPassword = await bcrypt.hash(req.body.password, 10);
   console.log(hashedPassword);
@@ -151,7 +160,8 @@ exports.addNewSchool = async (req, res) => {
     from: "jesse-jenkins@hotmail.com",
     to: "jesse-jenkins@hotmail.com",
     subject: "Dojo Management Email Verification",
-    text: `Hello, this is an automated email to verify your account.\n\nClick the link below to verify and log in.\n\n${process.env.BASE_URL}/api/verifyNewAccount?token=${token}`,
+    text: `Hello, this is an automated email to verify your account.\n\nClick the link below to verify and log in.
+    \n\n${process.env.BASE_URL}/api/verifyNewAccount?token=${token}`,
   };
 
   //send email
@@ -162,7 +172,7 @@ exports.addNewSchool = async (req, res) => {
     }
     console.log(info.response);
   });
-  return res.location("/").sendStatus(302);
+  return res.location("/").send(302);
 };
 
 exports.login = async (req, res) => {
@@ -252,7 +262,7 @@ exports.getSchool = async (req, res) => {
 exports.getStudentAttendance = async (req, res) => {
   console.log("Entered get attendance");
   let attendances;
-  console.log(req.body);
+  console.log("this is the impotant one", req.body);
   const token = jwt.verify(req.body.school, process.env.JWT_TOKEN_SECRET);
   console.log(token);
   // const school_id = req.body.school;
@@ -454,4 +464,26 @@ exports.generateNewStudentLink = async (req, res) => {
   const link = `${process.env.BASE_URL}/api/addStudentFromLink?token=${token}`;
   console.log(link);
   return res.json({ success: true, result: link });
+};
+
+exports.editNote = async (req, res) => {
+  console.log(req.body);
+  try {
+    await Note.updateOne({ _id: req.body._id }, { content: req.body.note });
+  } catch (error) {
+    console.log("Failed to update note - " + error);
+    return res.json({ result: "fail", error: error }).send(400);
+  }
+  return res.send(200);
+};
+
+exports.deleteNote = async (req, res) => {
+  console.log(req.query.note);
+  try {
+    await Note.deleteOne({ _id: req.query.note });
+  } catch (error) {
+    console.log("Failed to delete note - " + error);
+    return res.json({ result: "fail", error: error }).send(400);
+  }
+  return res.json({ result: "successfully deleted note" });
 };

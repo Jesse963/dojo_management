@@ -2,11 +2,16 @@ import React, { Component } from "react";
 import "../core.css";
 
 class NewStudentForm extends Component {
+  state = {
+    link: "",
+    buttonStatus: "Copy",
+  };
   generateNewStudentLink = async () => {
     let link = await fetch("/api/generateNewStudentLink");
     link = await link.json();
     link = link.result;
     console.log(link);
+    this.setState({ link: link });
   };
   renderLinkButton() {
     if (this.props.fromLink) {
@@ -26,7 +31,55 @@ class NewStudentForm extends Component {
       </button>
     );
   }
+
+  copyLink() {
+    const linkArea = document.getElementById("newStudentLink");
+    linkArea.select();
+    document.execCommand("copy");
+    window.getSelection().removeAllRanges();
+    this.setState({ buttonStatus: "Link Copied to Clipboard!" });
+  }
   render() {
+    if (this.state.link) {
+      return (
+        <div
+          style={{ height: "45vh" }}
+          className="shadow-lg p-3 mb-5 bg-white rounded page container"
+        >
+          <h1>Student Link</h1>
+          <p>
+            Send this link to your students and they will be able to add their
+            details to your school, saving you the hastle of adding all of your
+            students in one go.
+          </p>
+          <p>
+            The link is only valid for 24 hours, but you can create another one
+            whenever you need.
+          </p>
+          <textarea
+            name="newStudentLink"
+            id="newStudentLink"
+            cols="30"
+            rows="3"
+            stlye={{ border: "none !important" }}
+            defaultValue={this.state.link}
+          ></textarea>
+          <p></p>
+          <button
+            className="btn btn-primary m-2"
+            onClick={() => this.copyLink()}
+          >
+            {this.state.buttonStatus}
+          </button>
+          <button
+            className="btn btn-secondary m-2"
+            onClick={() => (window.location.href = "/")}
+          >
+            Home
+          </button>
+        </div>
+      );
+    }
     return (
       <form
         method="POST"
@@ -112,17 +165,6 @@ class NewStudentForm extends Component {
             Submit
           </button>
           {this.renderLinkButton()}
-          {/* <button
-            type="cancel"
-            className="btn btn-primary btn-lg m-2"
-            style={{ width: "20%" }}
-            onClick={(e) => {
-              e.preventDefault();
-              this.generateNewStudentLink();
-            }}
-          >
-            Generate Link
-          </button> */}
           <button
             type="cancel"
             className="btn btn-danger btn-lg m-2"
