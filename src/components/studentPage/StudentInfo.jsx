@@ -49,21 +49,23 @@ class StudentInfo extends Component {
             listStyle: "none",
             margin: "0",
             padding: "0",
+            marginBottom: "5%",
           }}
         >
-          <li>{this.props.student.dob}</li>
           <li>{this.props.student.phone}</li>
-          <li>{this.props.student.grade}</li>
+          <li>{this.props.student.email}</li>
+          {/* <li>{this.props.student.grade}</li> */}
         </ul>
         <h3>Attended Classes</h3>
         <div
           className="student attendance mt-3"
-          style={{ maxHeight: "50vh", overflow: "auto" }}
+          style={{ maxHeight: "45vh", minHeight: "45vh", overflow: "auto" }}
         >
           {this.props.classes.map((Class, i) => {
             return (
               <ClassInformation
                 class={Class}
+                key={i}
                 id={i}
                 clickHandler={() => console.log("nothing")}
               />

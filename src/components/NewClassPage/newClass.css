@@ -1,0 +1,13 @@
+@media only screen and (max-width: 800px) {
+  #mainContentDivider {
+    flex-direction: column !important;
+    border: 2px pink solid;
+    height: 70%;
+    overflow: auto;
+  }
+  .panel {
+    width: 100% !important;
+    border: none !important;
+    margin: 0 !important;
+  }
+}

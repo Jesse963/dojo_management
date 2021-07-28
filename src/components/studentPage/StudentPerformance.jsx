@@ -12,6 +12,7 @@ class StudentPerformance extends Component {
       <NoteForm student={this.props.student} />,
       document.querySelector(".student.notes")
     );
+    // document.getElementById("new note form").select();
     console.log("attempting to render");
   }
 

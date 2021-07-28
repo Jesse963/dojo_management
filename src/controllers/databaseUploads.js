@@ -12,7 +12,7 @@ require("dotenv").config();
 const transporter = nodemailer.createTransport({
   service: "hotmail",
   auth: {
-    user: "jesse-jenkins@hotmail.com",
+    user: process.env.SENDER_EMAIL,
     pass: process.env.EMAIL_PASSWORD,
   },
 });
@@ -157,8 +157,8 @@ exports.addNewSchool = async (req, res) => {
 
   //set email options
   const emailOptions = {
-    from: "jesse-jenkins@hotmail.com",
-    to: "jesse-jenkins@hotmail.com",
+    from: process.env.SENDER_EMAIL,
+    to: process.env.SENDER_EMAIL,
     subject: "Dojo Management Email Verification",
     text: `Hello, this is an automated email to verify your account.\n\nClick the link below to verify and log in.
     \n\n${process.env.BASE_URL}/api/verifyNewAccount?token=${token}`,
@@ -227,11 +227,6 @@ exports.login = async (req, res) => {
         message: `Error getting students from database: ${error}`,
       });
   }
-};
-
-exports.test = async (req, res) => {
-  console.log("entered test");
-  res.location("/").send(302);
 };
 
 exports.getSchool = async (req, res) => {
@@ -321,42 +316,37 @@ exports.getFullAttendance = async (req, res) => {
 
 exports.calculateFullAttendancePercentages = async (req, res) => {
   console.log(req.body);
-  let attendancePercentages = [];
-  let attendances;
+  const studentArray = req.body.students;
   const token = jwt.verify(req.body.school, process.env.JWT_TOKEN_SECRET);
   const school_id = token.school_id;
+  let attendancePercentages = [];
+
   try {
-    const query = { school: req.body.school, fromServer: true };
-    //Collect total number of classes for the particular school
-    const schoolCount = await this.getFullAttendance({
-      body: query,
-      // body: { school: school_id },
+    const schoolClassCount = await Attendance.countDocuments({
+      school: school_id,
     });
-    const totalClasses = schoolCount.length;
-    console.log("total classed: ", totalClasses);
-    //Collect attendance information for each individual student - student/total = % of classes attended
-    await req.body.students.forEach(async (student, i) => {
-      attendances = await this.getStudentAttendance({
-        body: { school: req.body.school, _id: student._id, fromServer: true },
+    console.log(schoolClassCount);
+    await studentArray.forEach(async (student, i) => {
+      const studentClassCount = await Attendance.countDocuments({
+        attendees: student._id,
       });
-      console.log("attendances: ", attendances);
-      const studentPercentage = (100 * attendances.length) / totalClasses;
+      const studentAttendancePercentage =
+        (studentClassCount / schoolClassCount) * 100;
       attendancePercentages.push({
         _id: student._id,
         name: student.first_name + " " + student.last_name,
-        attendancePercentage: studentPercentage,
+        attendancePercentage: studentAttendancePercentage,
       });
+      console.log(student.first_name, studentAttendancePercentage);
 
-      if (i == req.body.students.length - 1) {
+      if (attendancePercentages.length === req.body.students.length) {
         return res.status(200).json({
           result: attendancePercentages,
-          classes: attendances,
           message: "Is this the one?",
           success: true,
         });
       }
     });
-    console.log("attendance count: ", attendancePercentages);
   } catch (error) {
     return res.status(400).json({
       error: true,
@@ -486,4 +476,11 @@ exports.deleteNote = async (req, res) => {
     return res.json({ result: "fail", error: error }).send(400);
   }
   return res.json({ result: "successfully deleted note" });
+};
+
+exports.test = async (req, res) => {
+  const attendanceCount = await Attendance.count({
+    attendees: "60fcbb273e2fbf2de80e2237",
+  });
+  res.json({ result: attendanceCount });
 };

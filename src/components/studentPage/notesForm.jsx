@@ -24,7 +24,7 @@ class NoteForm extends Component {
             overflow: "auto",
           }}
           wrap="hard"
-          rows="9"
+          rows="8"
           columns="2"
           placeholder="Enter a note here"
         />

@@ -9,7 +9,7 @@ require("dotenv").config();
 const transporter = nodemailer.createTransport({
   service: "hotmail",
   auth: {
-    user: "jesse-jenkins@hotmail.com",
+    user: process.env.SENDER_EMAIL,
     pass: process.env.EMAIL_PASSWORD,
   },
 });
@@ -46,8 +46,8 @@ exports.sendTestEmail = async (req, res) => {
     const token = jwt.sign(tokenData, secret);
 
     const emailOptions = {
-      from: "jesse-jenkins@hotmail.com",
-      to: "jesse-jenkins@hotmail.com",
+      from: process.env.SENDER_EMAIL,
+      to: process.env.SENDER_EMAIL,
       subject: "Password reset",
       text: `Hello, this is an automated email to reset your password.\n\n
       If you did not request this email please ignore it.\n\n
@@ -116,8 +116,8 @@ exports.sendVerificationEmail = async (req, res) => {
 
   //set email options
   const emailOptions = {
-    from: "jesse-jenkins@hotmail.com",
-    to: "jesse-jenkins@hotmail.com",
+    from: process.env.SENDER_EMAIL,
+    to: process.env.SENDER_EMAIL,
     subject: "Password reset",
     text: `Hello, this is an automated email to verify your account.\n\nClick the link below to verify and log in.\n\n${process.env.BASE_URL}/api/verifyNewAccount?token=${token}`,
   };

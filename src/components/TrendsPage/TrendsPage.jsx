@@ -23,11 +23,9 @@ class TrendsPage extends Component {
         school: school_id,
       }),
     };
-
     //retrieve list of all classes from DB
     const allClasses = await fetch("/api/getFullAttendance", options);
     const fullClassList = await allClasses.json();
-    console.log("here are all your classes: ", fullClassList.result);
 
     //retrieve attendance % for each student in the school
     const attendances = await fetch(
@@ -223,10 +221,20 @@ class TrendsPage extends Component {
         >
           <div
             className="left panel"
-            style={{ minHeight: "45vh", width: "25%", overflowY: "hidden" }}
+            style={{
+              minHeight: "45vh",
+              width: "25%",
+              overflowY: "hidden",
+            }}
           >
             <h2
-              style={{ textAlign: "center", cursor: "pointer" }}
+              className="school name header"
+              style={{
+                textAlign: "center",
+                cursor: "pointer",
+                paddingBottom: "5%",
+                borderBottom: "2px black dashed",
+              }}
               onClick={() => (window.location.href = "/")}
             >
               {this.props.school.name}
@@ -239,12 +247,11 @@ class TrendsPage extends Component {
                 textAlign: "center",
                 alignItems: "left",
                 width: "12vw",
-                margin: 0,
                 padding: 0,
               }}
             >
               <div
-                className="filters panel m-2"
+                className="filters panel"
                 style={{
                   textAlign: "center",
                   display: "flex",
@@ -253,7 +260,7 @@ class TrendsPage extends Component {
                 }}
               >
                 <button
-                  id="students filter button"
+                  id="students filter button mt-2"
                   className="btn btn-sm btn-primary m-1 button-half"
                   onClick={() => {
                     this.filterButtonHandler("students");
@@ -282,7 +289,7 @@ class TrendsPage extends Component {
                 </button>
               </div>
               <div
-                className="sort panel m-2"
+                className="sort panel mb-2"
                 style={{
                   textAlign: "center",
                   display: "flex",

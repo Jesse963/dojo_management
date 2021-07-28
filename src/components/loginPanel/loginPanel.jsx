@@ -221,6 +221,25 @@ class LoginPanel extends Component {
             </div>
           </form>
         );
+      case "Emailed":
+        return (
+          <main
+            style={{ background: "white", minHeight: "25vh" }}
+            className="page container"
+          >
+            <h3>Please check your email to confirm your account</h3>
+            <button
+              className="btn btn-secondary btn-lg m-3"
+              onClick={() => {
+                document.cookie =
+                  "school_id=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT";
+                window.location.href = "/";
+              }}
+            >
+              Back to Login
+            </button>
+          </main>
+        );
     }
   }
 }

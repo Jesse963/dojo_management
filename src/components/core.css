@@ -18,13 +18,15 @@
   .page.container {
     width: 90vw;
     min-height: 80vh;
+    height: 85vh;
     margin-top: 5%;
   }
-  .btn {
-    width: auto !important;
+  .btn.btn-lg {
+    margin: 3% !important;
+    width: 80% !important;
   }
   #root {
-    height: 120vh !important;
+    height: 100vh !important;
   }
 }
 

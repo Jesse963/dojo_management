@@ -2,6 +2,7 @@ import React, { Component, useState } from "react";
 import Student from "./student.jsx";
 import { DatePickerComponent } from "@syncfusion/ej2-react-calendars";
 import "../core.css";
+import "./newClass.css";
 
 class Students extends Component {
   state = {
@@ -71,7 +72,11 @@ class Students extends Component {
     return (
       <div className="attendance selection page container shadow-lg p-3 mb-5 bg-white rounded">
         <h1 className="m-3 mb-4">Select Attending Students</h1>
-        <div style={{ display: "flex", flexDirection: "row" }}>
+        <div
+          id="mainContentDivider"
+          classname="main content divider"
+          style={{ display: "flex", flexDirection: "row" }}
+        >
           <div
             className="left panel mb-2 mr-5 ml-5"
             style={{

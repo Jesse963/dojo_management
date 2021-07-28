@@ -16,7 +16,8 @@ class App extends Component {
     if (
       document.cookie.length === 0 ||
       document.cookie.split("school_id=")[1] === "failed_login" ||
-      document.cookie.split("school_id=")[1] === "Unvalidated_Account"
+      document.cookie.split("school_id=")[1] === "Unvalidated_Account" ||
+      document.cookie.split("school_id=")[1] === "emailed"
     ) {
       this.setState({ renderInfo: false });
     } else {
@@ -93,6 +94,13 @@ class App extends Component {
             </main>
           </React.Fragment>
         );
+      } else if (document.cookie.split("school_id=")[1] === "emailed") {
+        return (
+          <React.Fragment>
+            <NavBar />
+            <LoginPanel display={"Emailed"} />
+          </React.Fragment>
+        );
       }
       console.log("no cookie exists");
       return (
@@ -103,6 +111,7 @@ class App extends Component {
           </main>
         </React.Fragment>
       );
+      //Render info true vv
     } else {
       return (
         <React.Fragment>
