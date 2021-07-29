@@ -139,7 +139,7 @@ exports.addNewSchool = async (req, res) => {
       last_name: req.body.last_name,
       phone: req.body.phone,
       postcode: req.body.postcode,
-      schoolID: school_id,
+      school_id: school_id,
     });
     await school.save();
   } catch (error) {
@@ -194,11 +194,11 @@ exports.login = async (req, res) => {
     //compare user password to hashed DB password
     bcrypt.compare(req.body.password, school.password, (err, result) => {
       const token = jwt.sign(
-        { school_id: school.schoolID },
+        { school_id: school.school_id },
         process.env.JWT_TOKEN_SECRET
       );
       if (result) {
-        console.log("HERE IS YOUR SCHOOL ID:" + school.schoolID);
+        console.log("HERE IS YOUR SCHOOL ID:" + school.school_id);
         res.cookie(`school_id`, token);
         res.location("/");
         res.send(302);
@@ -239,7 +239,7 @@ exports.getSchool = async (req, res) => {
       req.body.school_id,
       process.env.JWT_TOKEN_SECRET
     ).school_id;
-    school = await School.find({ schoolID: school_id });
+    school = await School.find({ school_id: school_id });
   } catch (error) {
     return res.status(400).json({
       error: true,

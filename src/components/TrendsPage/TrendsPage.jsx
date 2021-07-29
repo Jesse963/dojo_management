@@ -260,7 +260,7 @@ class TrendsPage extends Component {
                 }}
               >
                 <button
-                  id="students filter button mt-2"
+                  id="students filter button"
                   className="btn btn-sm btn-primary m-1 button-half"
                   onClick={() => {
                     this.filterButtonHandler("students");
@@ -275,7 +275,7 @@ class TrendsPage extends Component {
                 </button>
                 <button
                   id="classes filter button"
-                  className="btn btn-sm btn-outline-primary m-1 button-half"
+                  className="btn btn-sm btn-outline-primary button-half m-1"
                   onClick={() => {
                     this.filterButtonHandler("classes");
                     this.setState({

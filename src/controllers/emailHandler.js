@@ -38,7 +38,7 @@ exports.sendTestEmail = async (req, res) => {
   } else {
     const email = school.email;
     const tokenData = {
-      school_id: school.schoolID,
+      school_id: school.school_id,
       updatedAt: school.updatedAt,
     };
     const secret = process.env.JWT_TOKEN_SECRET;
@@ -79,7 +79,7 @@ exports.updateUserPassword = async (req, res) => {
   const decodedToken = jwt.verify(token, process.env.JWT_TOKEN_SECRET);
   console.log("decoded token", decodedToken);
 
-  const school = await School.findOne({ schoolID: decodedToken.school_id });
+  const school = await School.findOne({ school_id: decodedToken.school_id });
 
   const dbDate = "" + new Date(school.updatedAt);
   const tokenDate = "" + new Date(decodedToken.updatedAt);
@@ -91,7 +91,7 @@ exports.updateUserPassword = async (req, res) => {
     });
   }
 
-  const query = { schoolID: decodedToken.school_id };
+  const query = { school_id: decodedToken.school_id };
   console.log("query for update one: ", query);
 
   const hashedPassword = await bcrypt.hash(req.body.password, 10);
@@ -144,7 +144,7 @@ exports.verifyNewAccount = async (req, res) => {
   try {
     decodedToken = jwt.verify(token, process.env.JWT_TOKEN_SECRET);
     school_id = decodedToken.school_id;
-    await School.updateOne({ schoolID: school_id }, { verified: true });
+    await School.updateOne({ school_id: school_id }, { verified: true });
   } catch (error) {
     console.log(
       "failed to update school or somethin gin the try im looking at"

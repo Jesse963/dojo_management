@@ -19,28 +19,26 @@ class StudentsOverview extends Component {
       switch (this.props.display) {
         case "Students":
           return (
-            <div>
-              <div
-                className="students overview ml-2"
-                style={{
-                  height: "45vh",
-                  overflowY: "auto",
-                  paddingRight: "10px",
-                }}
-              >
-                {this.props.fullAttendanceArray.map((student, i) => {
-                  return (
-                    <StudentTrend
-                      attendance={student}
-                      student={this.state.students.find(
-                        (search) => search._id === student._id
-                      )}
-                      totalStudents={this.props.students.length}
-                      key={i}
-                    />
-                  );
-                })}
-              </div>
+            <div
+              className="students overview ml-2"
+              style={{
+                height: "40vh",
+                overflowY: "auto",
+                paddingRight: "10px",
+              }}
+            >
+              {this.props.fullAttendanceArray.map((student, i) => {
+                return (
+                  <StudentTrend
+                    attendance={student}
+                    student={this.state.students.find(
+                      (search) => search._id === student._id
+                    )}
+                    totalStudents={this.props.students.length}
+                    key={i}
+                  />
+                );
+              })}
             </div>
           );
         case "Single":
@@ -49,7 +47,7 @@ class StudentsOverview extends Component {
               <div
                 className="students overview ml-2"
                 style={{
-                  height: "45vh",
+                  height: "40vh",
                   overflowY: "auto",
                   paddingRight: "10px",
                 }}
@@ -77,7 +75,7 @@ class StudentsOverview extends Component {
               <div
                 className="students overview ml-2"
                 style={{
-                  height: "45vh",
+                  height: "40vh",
                   overflowY: "auto",
                   paddingRight: "10px",
                 }}

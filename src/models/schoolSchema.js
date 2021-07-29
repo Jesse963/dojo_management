@@ -34,7 +34,7 @@ let SchoolSchema = mongoose.Schema(
       type: Array,
       required: false,
     },
-    schoolID: {
+    school_id: {
       type: String,
       required: true,
     },
